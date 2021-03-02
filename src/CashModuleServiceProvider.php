@@ -21,6 +21,8 @@ class CashModuleServiceProvider extends ModuleServiceProvider {
         $this->loadRoutesFrom( module_path('routes/cash.php') );
         // load views
         $this->loadViewsFrom( module_path('resources/views'), 'cash' );
+        // load translations
+        $this->loadTranslationsFrom( module_path('resources/lang'), 'cash' );
         // load migrations
         $this->loadMigrationsFrom( module_path('database/migrations') );
         // load seeders
