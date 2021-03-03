@@ -2,13 +2,16 @@
 
 namespace HDSSolutions\Finpar;
 
-// use HDSSolutions\Finpar\Commands\Mix;
 use HDSSolutions\Laravel\Modules\ModuleServiceProvider;
 
 class CashModuleServiceProvider extends ModuleServiceProvider {
 
+    protected array $middlewares = [
+        \HDSSolutions\Finpar\Http\Middleware\CashMenu::class,
+    ];
+
     private $commands = [
-        // Mix::class,
+        // \HDSSolutions\Finpar\Commands\Mix::class,
     ];
 
     public function bootEnv():void {
@@ -37,7 +40,7 @@ class CashModuleServiceProvider extends ModuleServiceProvider {
         // register singleton
         app()->singleton('cash', fn() => new Cash);
         // register commands
-        // $this->commands( $this->commands );
+        $this->commands( $this->commands );
         // merge configuration
         $this->mergeConfigFrom( module_path('config/cash.php'), 'cash' );
     }
