@@ -16,7 +16,7 @@ class CashMenu {
     public function handle($request, Closure $next) {
         // create a submenu
         $sub = backend()->menu()
-            ->add(__('cash::nav'), [
+            ->add(__('cash::cash.nav'), [
                 'icon'  => 'cogs',
             ])->data('priority', 600);
 
