@@ -20,19 +20,22 @@ class CashMenu {
                 'icon'  => 'cogs',
             ])->data('priority', 600);
 
-        // $this
-        //     // append items to submenu
-        //     ->cash($sub);
+        // get configs menu group
+        $configs = backend()->menu()->get('configs');
+
+        $this
+            // append items to submenu
+            ->currencies($configs);
 
         // continue witn next middleware
         return $next($request);
     }
 
-    private function cash(&$menu) {
-        if (Route::has('backend.cash'))
-            $menu->add(__('cash::cash.nav'), [
-                'route'     => 'backend.cash',
-                'icon'      => 'cash'
+    private function currencies(&$menu) {
+        if (Route::has('backend.currencies'))
+            $menu->add(__('cash::currencies.nav'), [
+                'route'     => 'backend.currencies',
+                'icon'      => 'currencies'
             ]);
 
         return $this;
