@@ -21,7 +21,7 @@
         <form method="POST" action="{{ route('backend.currencies.update', $resource->id) }}" enctype="multipart/form-data">
             @method('PUT')
             @csrf
-            @include('backend::currencies.form')
+            @include('cash::currencies.form')
         </form>
     </div>
 </div>
