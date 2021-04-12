@@ -25,7 +25,10 @@ class CashMenu {
 
         $this
             // append items to submenu
-            ->currencies($configs);
+            ->currencies($configs)
+            ->cash_books($sub)
+            ->cashes($sub)
+            ->cashmovements($sub);
 
         // continue witn next middleware
         return $next($request);
@@ -36,6 +39,36 @@ class CashMenu {
             $menu->add(__('cash::currencies.nav'), [
                 'route'     => 'backend.currencies',
                 'icon'      => 'currencies'
+            ]);
+
+        return $this;
+    }
+
+    private function cash_books(&$menu) {
+        if (Route::has('backend.cash_books'))
+            $menu->add(__('cash::cash_books.nav'), [
+                'route'     => 'backend.cash_books',
+                'icon'      => 'cash_books'
+            ]);
+
+        return $this;
+    }
+
+    private function cashes(&$menu) {
+        if (Route::has('backend.cashes'))
+            $menu->add(__('cash::cashes.nav'), [
+                'route'     => 'backend.cashes',
+                'icon'      => 'cashes'
+            ]);
+
+        return $this;
+    }
+
+    private function cashmovements(&$menu) {
+        if (Route::has('backend.cashmovements'))
+            $menu->add(__('cash::cashmovements.nav'), [
+                'route'     => 'backend.cashmovements',
+                'icon'      => 'cashmovements'
             ]);
 
         return $this;

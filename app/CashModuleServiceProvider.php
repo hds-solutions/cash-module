@@ -38,7 +38,7 @@ class CashModuleServiceProvider extends ModuleServiceProvider {
             //
             require_once $helpers;
         // register singleton
-        app()->singleton('cash', fn() => new Cash);
+        app()->singleton(Cash::class, fn() => new Cash);
         // register commands
         $this->commands( $this->commands );
         // merge configuration
