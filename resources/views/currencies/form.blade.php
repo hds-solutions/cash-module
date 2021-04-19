@@ -15,9 +15,6 @@
     placeholder="{{ __('cash::currency.decimals._') }}"
     helper="{{ __('cash::currency.decimals.?') }}" />
 
-<div class="form-row">
-    <div class="offset-0 offset-md-3 col-12 col-md-9">
-        <button type="submit" class="btn btn-success">@lang('cash::currencies.save')</button>
-        <a href="{{ route('backend.currencies') }}" class="btn btn-danger">@lang('cash::currencies.cancel')</a>
-    </div>
-</div>
+<x-backend-form-controls
+    submit="cash::currencies.save"
+    cancel="cash::currencies.cancel" cancel-route="backend.currencies" />

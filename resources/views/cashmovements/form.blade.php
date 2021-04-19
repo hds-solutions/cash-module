@@ -36,9 +36,6 @@
     placeholder="{{ __('cash::cash.rate._') }}"
     {{-- helper="{{ __('cash::cash.rate.?') }}" --}} />
 
-<div class="form-row">
-    <div class="offset-0 offset-md-3 col-12 col-md-9">
-        <button type="submit" class="btn btn-success">@lang('cash::cashmovements.save')</button>
-        <a href="{{ route('backend.cashmovements') }}" class="btn btn-danger">@lang('cash::cashmovements.cancel')</a>
-    </div>
-</div>
+<x-backend-form-controls
+    submit="cash::cashmovements.save"
+    cancel="cash::cashmovements.cancel" cancel-route="backend.cashmovements" />

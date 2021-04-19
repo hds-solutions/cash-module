@@ -28,8 +28,14 @@ class CashController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request, DataTable $dataTable) {
+        // check only-form flag
+        if ($request->has('only-form'))
+            // redirect to popup callback
+            return view('backend::components.popup-callback', [ 'resource' => new Resource ]);
+
         // load resources
         if ($request->ajax()) return $dataTable->ajax();
+
         // return view with dataTable
         return $dataTable->render('cash::cashes.index', [ 'count' => Resource::count() ]);
     }
