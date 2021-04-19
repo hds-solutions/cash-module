@@ -30,12 +30,12 @@
             <div class="col-12">
 
                 <div class="row">
-                    <div class="col-4 col-lg-4">@lang('cash::cashmovement.cash.cash_book.name.0'):</div>
+                    <div class="col-4 col-lg-4">@lang('cash::cashmovement.cash_id.0'):</div>
                     <div class="col-8 col-lg-6 h4">{{ $resource->cash->cashBook->name }}</div>
                 </div>
 
                 <div class="row">
-                    <div class="col-4 col-lg-4">@lang('cash::cashmovement.to_cash.cash_book.name.0'):</div>
+                    <div class="col-4 col-lg-4">@lang('cash::cashmovement.to_cash_id.0'):</div>
                     <div class="col-8 col-lg-6 h4">{{ $resource->toCash->cashBook->name }}</div>
                 </div>
 

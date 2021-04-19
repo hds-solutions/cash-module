@@ -5,7 +5,7 @@ namespace HDSSolutions\Finpar\Http\Controllers;
 use App\Http\Controllers\Controller;
 use HDSSolutions\Finpar\DataTables\CashMovementDataTable as DataTable;
 use HDSSolutions\Finpar\Http\Request;
-use HDSSolutions\Finpar\Models\CashBook;
+use HDSSolutions\Finpar\Models\Cash;
 use HDSSolutions\Finpar\Models\CashMovement as Resource;
 use HDSSolutions\Finpar\Models\ConversionRate;
 use HDSSolutions\Finpar\Traits\CanProcessDocument;
@@ -47,16 +47,13 @@ class CashMovementController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function create() {
-        // load cash_books
-        $cash_books = CashBook::with([
-            // get only open Cashes of CashBook
-            'cashes' => fn($cashes) => $cashes->open(),
-        ])->get();
+        // load open cashes
+        $cashes = Cash::open()->get();
         // get current conversion rates
         $conversion_rates = ConversionRate::valid()->get();
 
         // show create form
-        return view('cash::cashmovements.create', compact('cash_books', 'conversion_rates'));
+        return view('cash::cashmovements.create', compact('cashes', 'conversion_rates'));
     }
 
     /**
@@ -116,16 +113,13 @@ class CashMovementController extends Controller {
             // redirect to show route
             return redirect()->route('backend.cashmovements.show', $resource);
 
-        // load cash_books
-        $cash_books = CashBook::with([
-            // get only open Cashes of CashBook
-            'cashes' => fn($cashes) => $cashes->open(),
-        ])->get();
+        // load open cashes
+        $cashes = Cash::open()->get();
         // get current conversion rates
         $conversion_rates = ConversionRate::valid()->get();
 
         // show edit form
-        return view('cash::cashmovements.edit', compact('cash_books', 'conversion_rates',
+        return view('cash::cashmovements.edit', compact('cashes', 'conversion_rates',
             'resource'));
     }
 

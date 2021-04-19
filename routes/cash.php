@@ -33,9 +33,9 @@ Route::group([
         ->parameters([ 'cash_lines' => 'resource' ])
         ->name('index', 'backend.cash_lines');
 
-    // Route::resource('conversion_rates', ConversionRatesController::class,   $name_prefix)
-    //     ->parameters([ 'conversion_rates' => 'resource' ])
-    //     ->name('index', 'backend.conversion_rates');
+    Route::resource('conversion_rates', ConversionRatesController::class,   $name_prefix)
+        ->parameters([ 'conversion_rates' => 'resource' ])
+        ->name('index', 'backend.conversion_rates');
 
     Route::resource('cashmovements',    CashMovementController::class,      $name_prefix)
         ->parameters([ 'cashmovements' => 'resource' ])

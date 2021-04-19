@@ -22,6 +22,7 @@ class CreateCashesTable extends Migration {
             $table->id();
             $table->foreignTo('Company');
             $table->foreignTo('CashBook');
+            $table->string('description');
             $table->amount('start_balance');
             $table->amount('end_balance');
             $table->asDocument();

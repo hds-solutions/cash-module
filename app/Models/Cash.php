@@ -55,7 +55,7 @@ class Cash extends X_Cash implements Document {
             // get last one
             ->latest()->first())
 
-            // set current Cash.start_balance and end_balance
+            // set Cash.start_balance and end_balance based on last completed Cash
             $this->start_balance = $this->end_balance = $cash->end_balance;
     }
 

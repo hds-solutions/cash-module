@@ -79,7 +79,7 @@
                         <thead>
                             <tr>
                                 <th>@lang('cash::cash.lines.created_at.0')</th>
-                                <th>@lang('cash::cash.lines.cash_type_id.0')</th>
+                                <th>@lang('cash::cash.lines.cash_type.0')</th>
                                 <th>@lang('cash::cash.lines.description.0')</th>
                                 <th>@lang('cash::cash.lines.amount.0')</th>
                                 <th>@lang('cash::cash.lines.new_amount.0')</th>

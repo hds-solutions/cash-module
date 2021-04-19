@@ -14,9 +14,9 @@
 <x-backend-form-select :resource="$resource ?? null" name="cash_type" required
     :values="\HDSSolutions\Finpar\Models\CashLine::CASH_TYPES" {{-- default="123" --}}
 
-    label="{{ __('products-catalog::product.cash_type.0') }}"
-    placeholder="{{ __('products-catalog::product.cash_type._') }}"
-    {{-- helper="{{ __('products-catalog::product.cash_type.?') }}" --}} />
+    label="{{ __('cash::cash_line.cash_type.0') }}"
+    placeholder="{{ __('cash::cash_line.cash_type._') }}"
+    {{-- helper="{{ __('cash::cash_line.cash_type.?') }}" --}} />
 
 <x-backend-form-foreign :resource="$resource ?? null" name="currency_id" required
     foreign="currencies" :values="$cashes->pluck('cashBook.currency')->flatten()->unique()"

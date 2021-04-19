@@ -15,13 +15,13 @@ abstract class X_CashLine extends Base\Model {
     const CASH_TYPE_GeneralExpense          = 'GE';
     const CASH_TYPE_Invoice                 = 'IN';
     const CASH_TYPES = [
-        self::CASH_TYPE_TransferIn              => 'cash::cash_line.cast_type.transfer_in',
-        self::CASH_TYPE_TransferOut             => 'cash::cash_line.cast_type.transfer_out',
-        self::CASH_TYPE_Difference              => 'cash::cash_line.cast_type.difference',
-        self::CASH_TYPE_CreditNote              => 'cash::cash_line.cast_type.credit_note',
-        self::CASH_TYPE_EmployeeAnticipation    => 'cash::cash_line.cast_type.employee_anticipation',
-        self::CASH_TYPE_GeneralExpense          => 'cash::cash_line.cast_type.general_expense',
-        self::CASH_TYPE_Invoice                 => 'cash::cash_line.cast_type.invoice',
+        self::CASH_TYPE_TransferIn              => 'cash::cash_line.cash_type.transfer_in',
+        self::CASH_TYPE_TransferOut             => 'cash::cash_line.cash_type.transfer_out',
+        self::CASH_TYPE_Difference              => 'cash::cash_line.cash_type.difference',
+        self::CASH_TYPE_CreditNote              => 'cash::cash_line.cash_type.credit_note',
+        self::CASH_TYPE_EmployeeAnticipation    => 'cash::cash_line.cash_type.employee_anticipation',
+        self::CASH_TYPE_GeneralExpense          => 'cash::cash_line.cash_type.general_expense',
+        self::CASH_TYPE_Invoice                 => 'cash::cash_line.cash_type.invoice',
     ];
 
     protected $orderBy = [

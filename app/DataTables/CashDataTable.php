@@ -27,6 +27,9 @@ class CashDataTable extends Base\DataTable {
             Column::make('cash_book.name')
                 ->title( __('cash::cash.cash_book_id.0') ),
 
+            Column::make('description')
+                ->title( __('cash::cash.description.0') ),
+
             Column::make('cash_book.currency.name')
                 ->title( __('cash::cash.currency_id.0') ),
 

@@ -31,10 +31,10 @@ class CashMovementDataTable extends Base\DataTable {
                 ->renderRaw('datetime:created_at;F j, Y H:i'),
 
             Column::make('cash.cash_book.name')
-                ->title( __('cash::cashmovement.cash.0') ),
+                ->title( __('cash::cashmovement.cash_id.0') ),
 
             Column::make('to_cash.cash_book.name')
-                ->title( __('cash::cashmovement.toCash.0') ),
+                ->title( __('cash::cashmovement.to_cash_id.0') ),
 
             Column::computed('amount')
                 ->title( __('cash::cashmovement.amount.0') )
