@@ -28,13 +28,18 @@ class Cash extends X_Cash implements Document {
     }
 
     // @override
-    public function scopeOpen(Builder $query, ?CashBook $cashBook = null) {
+    public function scopeOpen(Builder $query, CashBook|int|null $cashBook = null) {
         // get trait original scope query
         $query = $this->scopeOpenTrait($query);
         // append filter to only specific CashBook
-        if ($cashBook !== null) $query->where('cash_book_id', $cashBook->id);
+        if ($cashBook !== null) $query->where('cash_book_id', $cashBook instanceof CashBook ? $cashBook->id : $cashBook);
         // return filtered query
         return $query;
+    }
+
+    public function scopeOfCashBook(Builder $query, CashBook $cashBook) {
+        //
+        return $query->where('cash_book_id', $cashBook->id);
     }
 
     protected function beforeSave(Validator $validator) {
@@ -42,6 +47,16 @@ class Cash extends X_Cash implements Document {
         if (!$this->exists && Cash::open($this->cashBook)->count() > 0)
             // return error
             $validator->errors()->add('cash_book_id', __('cash::cash.already-open', [ 'cashBook' => $this->cashBook->name ]));
+
+        // get cashes of current CashBook
+        if (!$this->exists && $cash = Cash::ofCashBook($this->cashBook)
+            // only completed cash documents
+            ->completed()
+            // get last one
+            ->latest()->first())
+
+            // set current Cash.start_balance and end_balance
+            $this->start_balance = $this->end_balance = $cash->end_balance;
     }
 
     public function prepareIt():?string {
@@ -51,9 +66,22 @@ class Cash extends X_Cash implements Document {
         return Document::STATUS_InProgress;
     }
 
+    public function approveIt():bool {
+        // mark document as approved
+        return true;
+    }
+
+    public function rejectIt():bool {
+        // mark document as rejected
+        return true;
+    }
+
     public function completeIt():?string {
+        // check if the document is approved
+        if (!$this->isApproved()) return $this->documentError( __('cash::cash.not-approved') );
+
         // TODO: completeIt() process
-        return null;
+        return Document::STATUS_Completed;
     }
 
 }

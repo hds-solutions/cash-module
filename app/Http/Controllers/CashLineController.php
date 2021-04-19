@@ -3,25 +3,12 @@
 namespace HDSSolutions\Finpar\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use HDSSolutions\Finpar\DataTables\CashDataTable as DataTable;
+use HDSSolutions\Finpar\DataTables\CashLineDataTable as DataTable;
 use HDSSolutions\Finpar\Http\Request;
-use HDSSolutions\Finpar\Models\Cash as Resource;
-use HDSSolutions\Finpar\Models\CashBook;
-use HDSSolutions\Finpar\Traits\CanProcessDocument;
+use HDSSolutions\Finpar\Models\Cash;
+use HDSSolutions\Finpar\Models\CashLine as Resource;
 
-class CashController extends Controller {
-    use CanProcessDocument;
-
-    protected function documentClass():string {
-        // return class
-        return Resource::class;
-    }
-
-    protected function redirectTo():string {
-        // go to resource view
-        return 'backend.cashes.show';
-    }
-
+class CashLineController extends Controller {
     /**
      * Display a listing of the resource.
      *
@@ -37,7 +24,7 @@ class CashController extends Controller {
         if ($request->ajax()) return $dataTable->ajax();
 
         // return view with dataTable
-        return $dataTable->render('cash::cashes.index', [ 'count' => Resource::count() ]);
+        return $dataTable->render('cash::cash_lines.index', [ 'count' => Resource::count() ]);
     }
 
     /**
@@ -45,11 +32,16 @@ class CashController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
-    public function create() {
-        // load cash_books
-        $cash_books = CashBook::all();
+    public function create(Request $request) {
+        // load open cashes
+        $cashes = Cash::open()->with([
+            'cashBook.currency',
+        ])->get();
+        // get selected cash
+        $cash = $cashes->firstWhere('id', $request->cash);
+
         // show create form
-        return view('cash::cashes.create', compact('cash_books'));
+        return view('cash::cash_lines.create', compact('cashes', 'cash'));
     }
 
     /**
@@ -77,7 +69,7 @@ class CashController extends Controller {
             // redirect to popup callback
             view('backend::components.popup-callback', compact('resource')) :
             // redirect to resources list
-            redirect()->route('backend.cashes');
+            redirect()->route('backend.cashes.show', $resource->cash);
     }
 
     /**
@@ -93,7 +85,7 @@ class CashController extends Controller {
             'lines',
         ]);
         // redirect to list
-        return view('cash::cashes.show', compact('resource'));
+        return view('cash::cash_lines.show', compact('resource'));
     }
 
     /**
@@ -111,7 +103,7 @@ class CashController extends Controller {
         // load cash_books
         $cash_books = CashBook::all();
         // show edit form
-        return view('cash::cashes.edit', compact('cash_books', 'resource'));
+        return view('cash::cash_lines.edit', compact('cash_books', 'resource'));
     }
 
     /**

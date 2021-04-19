@@ -13,7 +13,9 @@
                 @lang('cash::cashes.show')
             </div>
             <div class="col-6 d-flex justify-content-end">
-                @if (!$resource->isCompleted())
+                @if ($resource->isOpen())
+                <a href="{{ route('backend.cash_lines.create', [ 'cash' => $resource ]) }}"
+                    class="btn btn-sm ml-2 btn-success">@lang('cash::cash_lines.create')</a>
                 <a href="{{ route('backend.cashes.edit', $resource) }}"
                     class="btn btn-sm ml-2 btn-info">@lang('cash::cashes.edit')</a>
                 @endif
@@ -88,7 +90,7 @@
                         <tbody>
                             @php $end_balance = $resource->start_balance; @endphp
                             @foreach ($resource->lines as $line)
-                                <tr>
+                                <tr class="@if ($line->amount < 0) text-danger @endif">
                                     <td class="align-middle pl-3">{{ pretty_date($line->created_at, true) }}</td>
                                     <td class="align-middle pl-3">{{ $line->cash_type }}</td>
                                     <td class="align-middle pl-3">{{ $line->description }}</td>

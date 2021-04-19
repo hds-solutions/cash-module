@@ -57,7 +57,11 @@ class CashLine extends X_CashLine {
 
     public function afterSave() {
         // update cash ending balande
-        $this->cash->update([ 'end_balance' => $this->cash->lines->sum('amount') ]);
+        $this->cash->update([
+            // set start balance
+            'end_balance' => $this->cash->start_balance
+                // add lines amount
+                + $this->cash->lines->sum('amount') ]);
     }
 
 }

@@ -7,7 +7,7 @@
     placeholder="{{ __('cash::cash.cash_book_id._') }}"
     {{-- helper="{{ __('cash::cash.cash_book_id.?') }}" --}} />
 
-<x-backend-form-amount :resource="$resource ?? null" name="start_balance" required
+<x-backend-form-amount :resource="$resource ?? null" name="start_balance"
     label="{{ __('cash::cash.start_balance.0') }}"
     placeholder="{{ __('cash::cash.start_balance._') }}"
     {{-- helper="{{ __('cash::cash.start_balance.?') }}" --}} />
