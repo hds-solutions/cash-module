@@ -7,6 +7,10 @@ use HDSSolutions\Finpar\Traits\BelongsToCompany;
 abstract class X_Cash extends Base\Model {
     use BelongsToCompany;
 
+    protected $orderBy = [
+        'document_completed_at',
+    ];
+
     protected $attributes = [
         'end_balance'   => 0,
     ];

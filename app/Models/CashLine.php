@@ -30,10 +30,6 @@ class CashLine extends X_CashLine {
         return $this->belongsTo(Cash::class);
     }
 
-    public function cashType() {
-        return $this->belongsTo(CashType::class);
-    }
-
     public function currency() {
         return $this->belongsTo(Currency::class);
     }
@@ -45,6 +41,18 @@ class CashLine extends X_CashLine {
     public function beforeSave(Validator $validator) {
         // set currency from header if not set
         if ($this->currency_id === null) $this->currency()->associate( $this->cash->currency );
+        // cash_type validations
+        switch ($this->cash_type) {
+            case self::CASH_TYPE_CreditNote:
+                // TODO: Validate refers to CreditNote
+                break;
+            case self::CASH_TYPE_EmployeeAnticipation:
+                // TODO: Validate refers to Employee
+                break;
+            case self::CASH_TYPE_Invoice:
+                // TODO: Validate refers to Invoice
+                break;
+        }
     }
 
     public function afterSave() {

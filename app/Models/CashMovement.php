@@ -55,14 +55,14 @@ class CashMovement extends X_CashMovement implements Document {
 
         // create out movement on origin cash
         $out = $this->cash->lines()->create([
-            'cash_type_id'  => ($cashType = CashType::where('transfer', true)->first())->id, // FIXME: Get CashType from configuration (?)
+            'cash_type'     => CashLine::CASH_TYPE_TransferOut,
             'description'   => $this->description,
             'currency_id'   => $this->cash->currency_id, // TODO: Fix validation to allow beforeSave() before Validation->validate()
             'amount'        => $this->amount * -1, // negated amount since this is the origin
         ]);
         // create in movement on destination cash
         $in = $this->toCash->lines()->create([
-            'cash_type_id'  => $cashType->id, // FIXME: Get CashType from configuration (?)
+            'cash_type'     => CashLine::CASH_TYPE_TransferIn,
             'description'   => $this->description,
             'currency_id'   => $this->toCash->currency_id, // TODO: Fix validation to allow beforeSave() before Validation->validate()
             'amount'        => $this->amount,

@@ -22,17 +22,12 @@ class CreateCashLinesTable extends Migration {
             $table->id();
             $table->foreignTo('Company');
             $table->foreignTo('Cash');
-            $table->foreignTo('CashType');
             $table->foreignTo('Currency');
+            $table->char('cash_type', 2);
             $table->amount('amount', signed: true);
             $table->string('description');
             // add relation to movement as morphable object
             $table->morphable('refer')->nullable();
-            // $table->foreignTo('Cash', 'to_cash_id')->nullable();
-            // $table->foreignTo('BankAccount')->nullable();
-            // $table->foreignTo('Invoice')->nullable();
-            // $table->foreignTo('Employee')->nullable();
-            // $table->foreignTo('CreditNote')->nullable();
         });
     }
 

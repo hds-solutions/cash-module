@@ -90,7 +90,7 @@
                             @foreach ($resource->lines as $line)
                                 <tr>
                                     <td class="align-middle pl-3">{{ pretty_date($line->created_at, true) }}</td>
-                                    <td class="align-middle pl-3">{{ $line->cashType->name }}</td>
+                                    <td class="align-middle pl-3">{{ $line->cash_type }}</td>
                                     <td class="align-middle pl-3">{{ $line->description }}</td>
                                     <td class="align-middle pl-3">{{ amount($line->amount, $line->currency) }}</td>
                                     <td class="align-middle pl-3">{{ amount($line->net_amount, $resource->cashBook->currency) }}</td>
