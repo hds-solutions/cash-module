@@ -43,7 +43,7 @@ class CashDataTable extends Base\DataTable {
                 ->renderRaw('view:cash')
                 ->data( view('cash::cashes.datatable.end_balance')->render() ),
 
-            Column::make('document_status')
+            Column::make('document_status_pretty')
                 ->title( __('cash::cash.document_status.0') ),
 
             Column::computed('actions'),

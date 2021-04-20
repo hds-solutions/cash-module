@@ -44,7 +44,7 @@ class CashMovementDataTable extends Base\DataTable {
             Column::make('description')
                 ->title( __('cash::cashmovement.description.0') ),
 
-            Column::make('document_status')
+            Column::make('document_status_pretty')
                 ->title( __('cash::cashmovement.document_status.0') ),
 
             Column::computed('actions'),
