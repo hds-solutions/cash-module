@@ -18,7 +18,7 @@
                     class="btn btn-sm ml-2 btn-info">@lang('cash::cashmovements.edit')</a>
                 @endif
                 <a href="{{ route('backend.cashmovements.create') }}"
-                    class="btn btn-sm ml-2 btn-primary">@lang('cash::cashmovements.add')</a>
+                    class="btn btn-sm ml-2 btn-primary">@lang('cash::cashmovements.create')</a>
             </div>
         </div>
     </div>

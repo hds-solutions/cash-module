@@ -20,7 +20,7 @@
                     class="btn btn-sm ml-2 btn-info">@lang('cash::cashes.edit')</a>
                 @endif
                 <a href="{{ route('backend.cashes.create') }}"
-                    class="btn btn-sm ml-2 btn-primary">@lang('cash::cashes.add')</a>
+                    class="btn btn-sm ml-2 btn-primary">@lang('cash::cashes.create')</a>
             </div>
         </div>
     </div>

@@ -13,12 +13,12 @@
             </div>
             <div class="col-6 d-flex justify-content-end">
                 <a href="{{ route('backend.cash_lines.create') }}"
-                    class="btn btn-sm btn-primary">@lang('cash::cash_lines.add')</a>
+                    class="btn btn-sm btn-primary">@lang('cash::cash_lines.create')</a>
             </div>
         </div>
     </div>
     <div class="card-body">
-        <form method="POST" action="{{ route('backend.cash_lines.update', $resource->id) }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ route('backend.cash_lines.update', $resource) }}" enctype="multipart/form-data">
             @method('PUT')
             @csrf
             @include('cash::cash_lines.form')

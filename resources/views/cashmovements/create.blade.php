@@ -13,7 +13,7 @@
             </div>
             <div class="col-6 d-flex justify-content-end">
                 {{-- <a href="{{ route('backend.cashmovements.create') }}"
-                    class="btn btn-sm btn-primary">@lang('cash::cashmovements.add')</a> --}}
+                    class="btn btn-sm btn-primary">@lang('cash::cashmovements.create')</a> --}}
             </div>
         </div>
     </div>
