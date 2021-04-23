@@ -5,7 +5,7 @@
     request="cash"
 
     foreign-add-label="cash::cashes.add"
-    option-title="cashBook.name"
+    show="cashBook.name"
 
     label="cash::cash_line.cash_id.0"
     placeholder="cash::cash_line.cash_id._"
@@ -25,7 +25,7 @@
     append="decimals"
 
     foreign-add-label="cash::currencies.add"
-    {{-- option-title="cashBook.name" --}}
+    {{-- show="cashBook.name" --}}
 
     label="cash::cash_line.currency_id.0"
     placeholder="cash::cash_line.currency_id._"

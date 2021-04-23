@@ -2,7 +2,7 @@
 
 <x-backend-form-foreign :resource="$resource ?? null" name="cash_id" required
     foreign="cashes" :values="$cashes" foreign-add-label="{{ __('cash::cashes.add') }}"
-    option-title="cashBook.name"
+    show="cashBook.name"
 
     label="{{ __('cash::cashmovement.cash_id.0') }}"
     placeholder="{{ __('cash::cashmovement.cash_id._') }}"
@@ -10,7 +10,7 @@
 
 <x-backend-form-foreign :resource="$resource ?? null" name="to_cash_id" required
     foreign="cashes" :values="$cashes" foreign-add-label="{{ __('cash::cashes.add') }}"
-    option-title="cashBook.name"
+    show="cashBook.name"
 
     label="{{ __('cash::cashmovement.to_cash_id.0') }}"
     placeholder="{{ __('cash::cashmovement.to_cash_id._') }}"
