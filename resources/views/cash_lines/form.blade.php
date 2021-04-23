@@ -20,7 +20,7 @@
 
 <x-backend-form-foreign :resource="$resource ?? null" name="currency_id" required
     foreign="currencies" :values="$cashes->pluck('cashBook.currency')->flatten()->unique()"
-    request="currency" default="{{ $cash?->cashBook?->currency_id ?? null }}"
+    request="currency" default="{{ $cash?->cashBook?->currency_id ?? backend()->currency()->id }}"
 
     append="decimals"
 
