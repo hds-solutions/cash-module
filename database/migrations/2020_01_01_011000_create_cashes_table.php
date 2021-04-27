@@ -25,7 +25,21 @@ class CreateCashesTable extends Migration {
             $table->string('description');
             $table->amount('start_balance');
             $table->amount('end_balance');
+            // use table as document
             $table->asDocument();
+        });
+
+        // create lines table
+        $schema->create('cash_lines', function(Blueprint $table) {
+            $table->id();
+            $table->foreignTo('Company');
+            $table->foreignTo('Cash');
+            $table->foreignTo('Currency');
+            $table->char('cash_type', 2);
+            $table->amount('amount', signed: true);
+            $table->string('description');
+            // add relation to movement as morphable object
+            $table->morphable('refer')->nullable();
         });
     }
 
@@ -35,6 +49,7 @@ class CreateCashesTable extends Migration {
      * @return void
      */
     public function down() {
+        Schema::dropIfExists('cash_lines');
         Schema::dropIfExists('cashes');
     }
 
