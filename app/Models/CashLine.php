@@ -2,10 +2,11 @@
 
 namespace HDSSolutions\Finpar\Models;
 
-use HDSSolutions\Finpar\Traits\HasDocumentActions;
+use HDSSolutions\Finpar\Traits\HasPartnerable;
 use Illuminate\Validation\Validator;
 
 class CashLine extends X_CashLine {
+    use HasPartnerable;
 
     public function getNetAmountAttribute():int {
         //

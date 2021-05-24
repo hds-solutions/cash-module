@@ -37,6 +37,8 @@ abstract class X_CashLine extends Base\Model {
         'description',
         'cash_lineable_type',
         'cash_lineable_id',
+        'partnerable_type',
+        'partnerable_id',
     ];
 
     protected static $rules = [
@@ -47,6 +49,8 @@ abstract class X_CashLine extends Base\Model {
         'description'   => [ 'required' ],
         'cash_lineable_type'    => [ 'sometimes', 'nullable' ],
         'cash_lineable_id'      => [ 'sometimes', 'nullable' ],
+        'partnerable_type'      => [ 'sometimes', 'nullable' ],
+        'partnerable_id'        => [ 'sometimes', 'nullable' ],
     ];
 
     public final function setCashTypeAttribute(string $cash_type):void {

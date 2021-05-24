@@ -17,7 +17,8 @@ class CashMenu {
         // create a submenu
         $sub = backend()->menu()
             ->add(__('cash::cash.nav'), [
-                'icon'  => 'cogs',
+                'nickname'  => 'cash',
+                'icon'      => 'cogs',
             ])->data('priority', 600);
 
         // get configs menu group

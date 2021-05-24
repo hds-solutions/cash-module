@@ -40,6 +40,7 @@ class CreateCashesTable extends Migration {
             $table->string('description');
             // add relation to movement as morphable object
             $table->morphable('refer')->nullable();
+            $table->morphable('partner')->nullable();
         });
     }
 

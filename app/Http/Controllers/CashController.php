@@ -90,7 +90,10 @@ class CashController extends Controller {
         // load inventory data
         $resource->load([
             'cashBook.currency',
-            'lines',
+            'lines' => fn($line) => $line->with([
+                'cash',
+                'currency',
+            ]),
         ]);
         // redirect to list
         return view('cash::cashes.show', compact('resource'));
