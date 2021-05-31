@@ -5,14 +5,8 @@ namespace HDSSolutions\Finpar\Http\Middleware;
 use Closure;
 use Illuminate\Support\Facades\Route;
 
-class CashMenu {
-    /**
-     * Handle an incoming request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
-     * @return mixed
-     */
+class CashMenu extends Base\Menu {
+
     public function handle($request, Closure $next) {
         // create a submenu
         $sub = backend()->menu()
@@ -36,7 +30,7 @@ class CashMenu {
     }
 
     private function currencies(&$menu) {
-        if (Route::has('backend.currencies'))
+        if (Route::has('backend.currencies') && $this->can('currencies'))
             $menu->add(__('cash::currencies.nav'), [
                 'route'     => 'backend.currencies',
                 'icon'      => 'currencies'
@@ -46,7 +40,7 @@ class CashMenu {
     }
 
     private function cash_books(&$menu) {
-        if (Route::has('backend.cash_books'))
+        if (Route::has('backend.cash_books') && $this->can('cash_books'))
             $menu->add(__('cash::cash_books.nav'), [
                 'route'     => 'backend.cash_books',
                 'icon'      => 'cash_books'
@@ -56,7 +50,7 @@ class CashMenu {
     }
 
     private function cashes(&$menu) {
-        if (Route::has('backend.cashes'))
+        if (Route::has('backend.cashes') && $this->can('cashes'))
             $menu->add(__('cash::cashes.nav'), [
                 'route'     => 'backend.cashes',
                 'icon'      => 'cashes'
@@ -66,7 +60,7 @@ class CashMenu {
     }
 
     private function cashmovements(&$menu) {
-        if (Route::has('backend.cashmovements'))
+        if (Route::has('backend.cashmovements') && $this->can('cashmovements'))
             $menu->add(__('cash::cashmovements.nav'), [
                 'route'     => 'backend.cashmovements',
                 'icon'      => 'cashmovements'
