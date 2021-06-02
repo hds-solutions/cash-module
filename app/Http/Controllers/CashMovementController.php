@@ -13,6 +13,11 @@ use HDSSolutions\Finpar\Traits\CanProcessDocument;
 class CashMovementController extends Controller {
     use CanProcessDocument;
 
+    public function __construct() {
+        // check resource Policy
+        $this->authorizeResource(Resource::class, 'resource');
+    }
+
     protected function documentClass():string {
         // return class
         return Resource::class;
@@ -20,7 +25,7 @@ class CashMovementController extends Controller {
 
     protected function redirectTo():string {
         // go to inventory view
-        return 'backend.cashmovements.show';
+        return 'backend.cash_movements.show';
     }
 
     /**
@@ -38,7 +43,7 @@ class CashMovementController extends Controller {
         if ($request->ajax()) return $dataTable->ajax();
 
         // return view with dataTable
-        return $dataTable->render('cash::cashmovements.index', [ 'count' => Resource::count() ]);
+        return $dataTable->render('cash::cash_movements.index', [ 'count' => Resource::count() ]);
     }
 
     /**
@@ -53,7 +58,7 @@ class CashMovementController extends Controller {
         $conversion_rates = ConversionRate::valid()->get();
 
         // show create form
-        return view('cash::cashmovements.create', compact('cashes', 'conversion_rates'));
+        return view('cash::cash_movements.create', compact('cashes', 'conversion_rates'));
     }
 
     /**
@@ -81,7 +86,7 @@ class CashMovementController extends Controller {
             // redirect to popup callback
             view('backend::components.popup-callback', compact('resource')) :
             // redirect to resources list
-            redirect()->route('backend.cashmovements');
+            redirect()->route('backend.cash_movements');
     }
 
     /**
@@ -98,7 +103,7 @@ class CashMovementController extends Controller {
         ]);
 
         // redirect to list
-        return view('cash::cashmovements.show', compact('resource'));
+        return view('cash::cash_movements.show', compact('resource'));
     }
 
     /**
@@ -111,7 +116,7 @@ class CashMovementController extends Controller {
         // check if document is already approved or processed
         if ($resource->isApproved() || $resource->isProcessed())
             // redirect to show route
-            return redirect()->route('backend.cashmovements.show', $resource);
+            return redirect()->route('backend.cash_movements.show', $resource);
 
         // load open cashes
         $cashes = Cash::open()->get();
@@ -119,7 +124,7 @@ class CashMovementController extends Controller {
         $conversion_rates = ConversionRate::valid()->get();
 
         // show edit form
-        return view('cash::cashmovements.edit', compact('cashes', 'conversion_rates',
+        return view('cash::cash_movements.edit', compact('cashes', 'conversion_rates',
             'resource'));
     }
 
@@ -145,7 +150,7 @@ class CashMovementController extends Controller {
                 ->withInput();
 
         // redirect to list
-        return redirect()->route('backend.cashmovements');
+        return redirect()->route('backend.cash_movements');
     }
 
     /**
@@ -162,7 +167,7 @@ class CashMovementController extends Controller {
             // redirect with errors
             return back();
         // redirect to list
-        return redirect()->route('backend.cashmovements');
+        return redirect()->route('backend.cash_movements');
     }
 
 }

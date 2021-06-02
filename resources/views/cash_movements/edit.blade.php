@@ -1,6 +1,6 @@
 @extends('backend::layouts.master')
 
-@section('page-name', __('cash::cashmovements.title'))
+@section('page-name', __('cash::cash_movements.title'))
 
 @section('content')
 
@@ -9,19 +9,19 @@
         <div class="row">
             <div class="col-6">
                 <i class="fas fa-company-plus"></i>
-                @lang('cash::cashmovements.edit')
+                @lang('cash::cash_movements.edit')
             </div>
             <div class="col-6 d-flex justify-content-end">
-                <a href="{{ route('backend.cashmovements.create') }}"
-                    class="btn btn-sm btn-primary">@lang('cash::cashmovements.create')</a>
+                <a href="{{ route('backend.cash_movements.create') }}"
+                    class="btn btn-sm btn-primary">@lang('cash::cash_movements.create')</a>
             </div>
         </div>
     </div>
     <div class="card-body">
-        <form method="POST" action="{{ route('backend.cashmovements.update', $resource) }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ route('backend.cash_movements.update', $resource) }}" enctype="multipart/form-data">
             @method('PUT')
             @csrf
-            @include('cash::cashmovements.form')
+            @include('cash::cash_movements.form')
         </form>
     </div>
 </div>

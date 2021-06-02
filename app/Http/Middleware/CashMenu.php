@@ -23,7 +23,7 @@ class CashMenu extends Base\Menu {
             ->currencies($configs)
             ->cash_books($sub)
             ->cashes($sub)
-            ->cashmovements($sub);
+            ->cash_movements($sub);
 
         // continue witn next middleware
         return $next($request);
@@ -59,11 +59,11 @@ class CashMenu extends Base\Menu {
         return $this;
     }
 
-    private function cashmovements(&$menu) {
-        if (Route::has('backend.cashmovements') && $this->can('cashmovements'))
-            $menu->add(__('cash::cashmovements.nav'), [
-                'route'     => 'backend.cashmovements',
-                'icon'      => 'cashmovements'
+    private function cash_movements(&$menu) {
+        if (Route::has('backend.cash_movements') && $this->can('cash_movements'))
+            $menu->add(__('cash::cash_movements.nav'), [
+                'route'     => 'backend.cash_movements',
+                'icon'      => 'cash_movements'
             ]);
 
         return $this;

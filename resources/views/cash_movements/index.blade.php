@@ -1,7 +1,7 @@
 @extends('backend::layouts.master')
 
-@section('page-name', __('cash::cashmovements.title'))
-@section('description', __('cash::cashmovements.description'))
+@section('page-name', __('cash::cash_movements.title'))
+@section('description', __('cash::cash_movements.description'))
 
 @section('content')
 
@@ -10,11 +10,11 @@
         <div class="row">
             <div class="col-6">
                 <i class="fas fa-table"></i>
-                @lang('cash::cashmovements.index')
+                @lang('cash::cash_movements.index')
             </div>
             <div class="col-6 d-flex justify-content-end">
-                <a href="{{ route('backend.cashmovements.create') }}"
-                    class="btn btn-sm btn-primary">@lang('cash::cashmovements.create')</a>
+                <a href="{{ route('backend.cash_movements.create') }}"
+                    class="btn btn-sm btn-primary">@lang('cash::cash_movements.create')</a>
             </div>
         </div>
     </div>
@@ -33,8 +33,8 @@
                 <h3>@lang('backend.empty.title')</h3>
                 <p class="text-muted">
                     @lang('backend.empty.description')
-                    <a href="{{ route('backend.cashmovements.create') }}" class="text-custom">
-                        <ins>@lang('cash::cashmovements.create')</ins>
+                    <a href="{{ route('backend.cash_movements.create') }}" class="text-custom">
+                        <ins>@lang('cash::cash_movements.create')</ins>
                     </a>
                 </p>
             </div>

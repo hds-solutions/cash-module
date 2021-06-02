@@ -9,6 +9,12 @@ use HDSSolutions\Finpar\Models\CashBook as Resource;
 use HDSSolutions\Finpar\Models\Currency;
 
 class CashBookController extends Controller {
+
+    public function __construct() {
+        // check resource Policy
+        $this->authorizeResource(Resource::class, 'resource');
+    }
+
     /**
      * Display a listing of the resource.
      *

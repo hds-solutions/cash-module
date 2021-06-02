@@ -9,6 +9,12 @@ use HDSSolutions\Finpar\Models\Cash;
 use HDSSolutions\Finpar\Models\CashLine as Resource;
 
 class CashLineController extends Controller {
+
+    public function __construct() {
+        // check resource Policy
+        $this->authorizeResource(Resource::class, 'resource');
+    }
+
     /**
      * Display a listing of the resource.
      *

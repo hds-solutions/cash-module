@@ -37,10 +37,10 @@ Route::group([
         ->parameters([ 'conversion_rates' => 'resource' ])
         ->name('index', 'backend.conversion_rates');
 
-    Route::resource('cashmovements',    CashMovementController::class,      $name_prefix)
-        ->parameters([ 'cashmovements' => 'resource' ])
-        ->name('index', 'backend.cashmovements');
-    Route::post('cashmovements/{resource}/process', [ CashMovementController::class, 'processIt' ])
-        ->name('backend.cashmovements.process');
+    Route::resource('cash_movements',   CashMovementController::class,      $name_prefix)
+        ->parameters([ 'cash_movements' => 'resource' ])
+        ->name('index', 'backend.cash_movements');
+    Route::post('cash_movements/{resource}/process', [ CashMovementController::class, 'processIt' ])
+        ->name('backend.cash_movements.process');
 
 });
