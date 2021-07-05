@@ -14,6 +14,7 @@ abstract class X_CashLine extends Base\Model {
     const CASH_TYPE_EmployeeAnticipation    = 'EA';
     const CASH_TYPE_GeneralExpense          = 'GE';
     const CASH_TYPE_Invoice                 = 'IN';
+    const CASH_TYPE_Receipment              = 'RE';
     const CASH_TYPES = [
         self::CASH_TYPE_TransferIn              => 'cash::cash_line.cash_type.transfer_in',
         self::CASH_TYPE_TransferOut             => 'cash::cash_line.cash_type.transfer_out',
@@ -22,6 +23,7 @@ abstract class X_CashLine extends Base\Model {
         self::CASH_TYPE_EmployeeAnticipation    => 'cash::cash_line.cash_type.employee_anticipation',
         self::CASH_TYPE_GeneralExpense          => 'cash::cash_line.cash_type.general_expense',
         self::CASH_TYPE_Invoice                 => 'cash::cash_line.cash_type.invoice',
+        self::CASH_TYPE_Receipment              => 'cash::cash_line.cash_type.receipment',
     ];
 
     protected $orderBy = [
