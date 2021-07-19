@@ -1,5 +1,7 @@
 <?php return [
 
+    'nav'   => 'CashBook',
+
     'name'              => [
         'Name',
         '_' => 'Name',
