@@ -1,12 +1,12 @@
 <?php
 
-namespace HDSSolutions\Finpar\Http\Controllers;
+namespace HDSSolutions\Laravel\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use HDSSolutions\Finpar\DataTables\CashLineDataTable as DataTable;
-use HDSSolutions\Finpar\Http\Request;
-use HDSSolutions\Finpar\Models\Cash;
-use HDSSolutions\Finpar\Models\CashLine as Resource;
+use HDSSolutions\Laravel\DataTables\CashLineDataTable as DataTable;
+use HDSSolutions\Laravel\Http\Request;
+use HDSSolutions\Laravel\Models\Cash;
+use HDSSolutions\Laravel\Models\CashLine as Resource;
 
 class CashLineController extends Controller {
 

@@ -1,8 +1,8 @@
 <?php
 
-namespace HDSSolutions\Finpar\DataTables;
+namespace HDSSolutions\Laravel\DataTables;
 
-use HDSSolutions\Finpar\Models\CashBook as Resource;
+use HDSSolutions\Laravel\Models\CashBook as Resource;
 use Yajra\DataTables\Html\Column;
 
 class CashBookDataTable extends Base\DataTable {

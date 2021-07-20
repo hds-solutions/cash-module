@@ -1,6 +1,6 @@
 <?php
 
-use HDSSolutions\Finpar\Models\Currency;
+use HDSSolutions\Laravel\Models\Currency;
 
 if (! function_exists('amount')) {
     function amount($amount, int|Currency $currency, bool $raw = false) {

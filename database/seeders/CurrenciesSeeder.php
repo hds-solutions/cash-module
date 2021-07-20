@@ -1,8 +1,8 @@
 <?php
 
-namespace HDSSolutions\Finpar\Seeders;
+namespace HDSSolutions\Laravel\Seeders;
 
-use HDSSolutions\Finpar\Models\Currency;
+use HDSSolutions\Laravel\Models\Currency;
 use Illuminate\Database\Seeder;
 
 class CurrenciesSeeder extends Seeder {

@@ -16,8 +16,8 @@
     },
     "autoload": {
         "psr-4": {
-            "HDSSolutions\\Finpar\\": "app/",
-            "HDSSolutions\\Finpar\\Seeders\\": "database/seeders/"
+            "HDSSolutions\\Laravel\\": "app/",
+            "HDSSolutions\\Laravel\\Seeders\\": "database/seeders/"
         },
         "files": [
             "app/helpers.php"
@@ -26,10 +26,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "HDSSolutions\\Finpar\\CashModuleServiceProvider"
+                "HDSSolutions\\Laravel\\CashModuleServiceProvider"
             ],
             "aliases": {
-                "Cash": "HDSSolutions\\Finpar\\Cash\\Facade"
+                "Cash": "HDSSolutions\\Laravel\\Cash\\Facade"
             }
         }
     }

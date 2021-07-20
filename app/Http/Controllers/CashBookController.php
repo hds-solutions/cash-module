@@ -1,12 +1,12 @@
 <?php
 
-namespace HDSSolutions\Finpar\Http\Controllers;
+namespace HDSSolutions\Laravel\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use HDSSolutions\Finpar\DataTables\CashBookDataTable as DataTable;
-use HDSSolutions\Finpar\Http\Request;
-use HDSSolutions\Finpar\Models\CashBook as Resource;
-use HDSSolutions\Finpar\Models\Currency;
+use HDSSolutions\Laravel\DataTables\CashBookDataTable as DataTable;
+use HDSSolutions\Laravel\Http\Request;
+use HDSSolutions\Laravel\Models\CashBook as Resource;
+use HDSSolutions\Laravel\Models\Currency;
 
 class CashBookController extends Controller {
 

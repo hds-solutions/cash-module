@@ -12,7 +12,7 @@
     {{-- helper="{{ __('cash::cash_line.cash_id.?') }}" --}} />
 
 <x-backend-form-select :resource="$resource ?? null" name="cash_type" required
-    :values="\HDSSolutions\Finpar\Models\CashLine::CASH_TYPES" {{-- default="123" --}}
+    :values="\HDSSolutions\Laravel\Models\CashLine::CASH_TYPES" {{-- default="123" --}}
 
     label="{{ __('cash::cash_line.cash_type.0') }}"
     placeholder="{{ __('cash::cash_line.cash_type._') }}"

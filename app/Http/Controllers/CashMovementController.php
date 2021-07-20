@@ -1,14 +1,14 @@
 <?php
 
-namespace HDSSolutions\Finpar\Http\Controllers;
+namespace HDSSolutions\Laravel\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use HDSSolutions\Finpar\DataTables\CashMovementDataTable as DataTable;
-use HDSSolutions\Finpar\Http\Request;
-use HDSSolutions\Finpar\Models\Cash;
-use HDSSolutions\Finpar\Models\CashMovement as Resource;
-use HDSSolutions\Finpar\Models\ConversionRate;
-use HDSSolutions\Finpar\Traits\CanProcessDocument;
+use HDSSolutions\Laravel\DataTables\CashMovementDataTable as DataTable;
+use HDSSolutions\Laravel\Http\Request;
+use HDSSolutions\Laravel\Models\Cash;
+use HDSSolutions\Laravel\Models\CashMovement as Resource;
+use HDSSolutions\Laravel\Models\ConversionRate;
+use HDSSolutions\Laravel\Traits\CanProcessDocument;
 
 class CashMovementController extends Controller {
     use CanProcessDocument;

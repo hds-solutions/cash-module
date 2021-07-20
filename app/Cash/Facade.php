@@ -1,6 +1,6 @@
 <?php
 
-namespace HDSSolutions\Finpar\Cash;
+namespace HDSSolutions\Laravel\Cash;
 
 class Facade extends \Illuminate\Support\Facades\Facade {
     /**
