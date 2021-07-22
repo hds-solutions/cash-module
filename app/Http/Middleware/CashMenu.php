@@ -12,7 +12,7 @@ class CashMenu extends Base\Menu {
         $sub = backend()->menu()
             ->add(__('cash::cash.nav'), [
                 'nickname'  => 'cash',
-                'icon'      => 'cogs',
+                'icon'      => 'stamp',
             ])->data('priority', 600);
 
         // get configs menu group
@@ -33,7 +33,7 @@ class CashMenu extends Base\Menu {
         if (Route::has('backend.currencies') && $this->can('currencies'))
             $menu->add(__('cash::currencies.nav'), [
                 'route'     => 'backend.currencies',
-                'icon'      => 'currencies'
+                'icon'      => 'dollar-sign'
             ]);
 
         return $this;
@@ -43,7 +43,7 @@ class CashMenu extends Base\Menu {
         if (Route::has('backend.cash_books') && $this->can('cash_books'))
             $menu->add(__('cash::cash_books.nav'), [
                 'route'     => 'backend.cash_books',
-                'icon'      => 'cash_books'
+                'icon'      => 'book'
             ]);
 
         return $this;
@@ -53,7 +53,7 @@ class CashMenu extends Base\Menu {
         if (Route::has('backend.cashes') && $this->can('cashes'))
             $menu->add(__('cash::cashes.nav'), [
                 'route'     => 'backend.cashes',
-                'icon'      => 'cashes'
+                'icon'      => 'cash-register'
             ]);
 
         return $this;
@@ -63,7 +63,7 @@ class CashMenu extends Base\Menu {
         if (Route::has('backend.cash_movements') && $this->can('cash_movements'))
             $menu->add(__('cash::cash_movements.nav'), [
                 'route'     => 'backend.cash_movements',
-                'icon'      => 'cash_movements'
+                'icon'      => 'money-bill-wave'
             ]);
 
         return $this;

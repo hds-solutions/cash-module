@@ -15,12 +15,12 @@
             <div class="col-6 d-flex justify-content-end">
                 @if ($resource->isOpen())
                 <a href="{{ route('backend.cash_lines.create', [ 'cash' => $resource ]) }}"
-                    class="btn btn-sm ml-2 btn-success">@lang('cash::cash_lines.create')</a>
+                    class="btn btn-sm ml-2 btn-outline-success">@lang('cash::cash_lines.create')</a>
                 <a href="{{ route('backend.cashes.edit', $resource) }}"
-                    class="btn btn-sm ml-2 btn-info">@lang('cash::cashes.edit')</a>
+                    class="btn btn-sm ml-2 btn-outline-info">@lang('cash::cashes.edit')</a>
                 @endif
                 <a href="{{ route('backend.cashes.create') }}"
-                    class="btn btn-sm ml-2 btn-primary">@lang('cash::cashes.create')</a>
+                    class="btn btn-sm ml-2 btn-outline-primary">@lang('cash::cashes.create')</a>
             </div>
         </div>
     </div>

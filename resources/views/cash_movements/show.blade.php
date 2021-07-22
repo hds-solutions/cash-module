@@ -8,17 +8,17 @@
 <div class="card mb-3">
     <div class="card-header">
         <div class="row">
-            <div class="col-6">
-                <i class="fas fa-user-plus"></i>
+            <div class="col-6 d-flex align-items-center">
+                <i class="fas fa-user-plus mr-2"></i>
                 @lang('cash::cash_movements.show')
             </div>
             <div class="col-6 d-flex justify-content-end">
                 @if (!$resource->isCompleted())
                 <a href="{{ route('backend.cash_movements.edit', $resource) }}"
-                    class="btn btn-sm ml-2 btn-info">@lang('cash::cash_movements.edit')</a>
+                    class="btn btn-sm ml-2 btn-outline-info">@lang('cash::cash_movements.edit')</a>
                 @endif
                 <a href="{{ route('backend.cash_movements.create') }}"
-                    class="btn btn-sm ml-2 btn-primary">@lang('cash::cash_movements.create')</a>
+                    class="btn btn-sm ml-2 btn-outline-primary">@lang('cash::cash_movements.create')</a>
             </div>
         </div>
     </div>

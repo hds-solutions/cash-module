@@ -3,12 +3,23 @@
 namespace HDSSolutions\Laravel\DataTables;
 
 use HDSSolutions\Laravel\Models\Cash as Resource;
+use HDSSolutions\Laravel\Traits\DatatableAsDocument;
+use HDSSolutions\Laravel\Traits\DatatableWithCurrency;
+use Illuminate\Database\Eloquent\Builder;
 use Yajra\DataTables\Html\Column;
 
 class CashDataTable extends Base\DataTable {
+    use DatatableAsDocument;
+    use DatatableWithCurrency;
 
     protected array $with = [
         'cashBook.currency',
+    ];
+
+    protected array $orderBy = [
+        'document_completed_at' => 'desc',
+        'created_at'            => 'desc',
+        'description'           => 'asc',
     ];
 
     public function __construct() {
@@ -48,6 +59,40 @@ class CashDataTable extends Base\DataTable {
 
             Column::computed('actions'),
         ];
+    }
+
+    protected function joins(Builder $query):Builder {
+        // add custom JOIN to CashBook.currency
+        return $query
+            // join to CashBook
+            ->join('cash_books', 'cash_books.id', 'cashes.cash_book_id')
+            // join to currency
+            ->join('currencies', 'currencies.id', 'cash_books.currency_id');
+    }
+
+    protected function orderCashBookName(Builder $query, string $order):Builder {
+        // add custom orderBy for column CashBook.name
+        return $query->orderBy('cash_books.name', $order);
+    }
+
+    protected function searchCashBookName(Builder $query, string $value):Builder {
+        // return custom search for CashBook.name
+        return $query->where('cash_books.name', 'like', "%$value%");
+    }
+
+    protected function filterCashBook(Builder $query, $cash_book_id):Builder {
+        // filter only from CashBook
+        return $query->where('cash_book_id', $cash_book_id);
+    }
+
+    protected function orderCashBookCurrencyName(Builder $query, string $order):Builder {
+        // add custom orderBy for column Currency.name
+        return $query->orderBy('currencies.name', $order);
+    }
+
+    protected function searchCashBookCurrencyName(Builder $query, string $value):Builder {
+        // return custom search for CashBook.name
+        return $query->where('currencies.name', 'like', "%$value%");
     }
 
 }

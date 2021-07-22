@@ -30,6 +30,7 @@ Route::group([
     Route::post('cashes/{resource}/process',        [ CashController::class, 'processIt' ])
         ->name('backend.cashes.process');
     Route::resource('cash_lines',       CashLineController::class,  $name_prefix)
+        ->only([ 'create', 'store' ])
         ->parameters([ 'cash_lines' => 'resource' ])
         ->name('index', 'backend.cash_lines');
 

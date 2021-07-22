@@ -14,11 +14,6 @@ class CurrencyController extends Controller {
         $this->authorizeResource(Resource::class, 'resource');
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index(Request $request, DataTable $dataTable) {
         // check only-form flag
         if ($request->has('only-form'))
@@ -32,22 +27,11 @@ class CurrencyController extends Controller {
         return $dataTable->render('cash::currencies.index', [ 'count' => Resource::count() ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create() {
+    public function create(Request $request) {
         // show create form
         return view('cash::currencies.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request) {
         // cast to boolean
         // $request->merge([ 'show_home' => $request->show_home == 'on' ]);
@@ -58,9 +42,8 @@ class CurrencyController extends Controller {
         // save resource
         if (!$resource->save())
             // redirect with errors
-            return back()
-                ->withErrors( $resource->errors() )
-                ->withInput();
+            return back()->withInput()
+                ->withErrors( $resource->errors() );
 
         // check return type
         return $request->has('only-form') ?
@@ -70,66 +53,37 @@ class CurrencyController extends Controller {
             redirect()->route('backend.currencies');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Resource  $resource
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Resource $resource) {
+    public function show(Request $request, Resource $resource) {
         // redirect to list
         return redirect()->route('backend.currencies');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Resource  $resource
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Resource $resource) {
+    public function edit(Request $request, Resource $resource) {
         // show edit form
         return view('cash::currencies.edit', compact('resource'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Resource  $resource
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id) {
+    public function update(Request $request, Resource $resource) {
         // cast show_home to boolean
         // $request->merge([ 'show_home' => $request->show_home == 'on' ]);
-
-        // find resource
-        $resource = Resource::findOrFail($id);
 
         // save resource
         if (!$resource->update( $request->input() ))
             // redirect with errors
-            return back()
-                ->withErrors( $resource->errors() )
-                ->withInput();
+            return back()->withInput()
+                ->withErrors( $resource->errors() );
 
         // redirect to list
         return redirect()->route('backend.currencies');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Resource  $resource
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id) {
-        // find resource
-        $resource = Resource::findOrFail($id);
+    public function destroy(Request $request, Resource $resource) {
         // delete resource
         if (!$resource->delete())
             // redirect with errors
-            return back();
+            return back()
+                ->withErrors( $resource->errors() );
+
         // redirect to list
         return redirect()->route('backend.currencies');
     }
