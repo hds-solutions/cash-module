@@ -19,7 +19,7 @@
             </div>
         </div>
         <div class="row collapse @if (request()->has('filters')) show @endif" id="filters">
-            <form action="{{ route('backend.cashes') }}"
+            <form action="{{ route('backend.cash_movements') }}"
                 class="col mt-2 pt-3 pb-2 border-top">
 
                 <x-backend-form-foreign name="filters[cash_book]"
