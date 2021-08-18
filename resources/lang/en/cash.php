@@ -47,30 +47,6 @@
         '_' => 'Lines',
         '?' => 'Lines help text',
 
-        'created_at'    => [
-            'Created at',
-            '_' => 'Created at',
-            '?' => 'Created at',
-        ],
-
-        'cash_type'    => [
-            'Cash Type',
-            '_' => 'Cash Type',
-            '?' => 'Cash Type',
-        ],
-
-        'description'   => [
-            'Description',
-            '_' => 'Description',
-            '?' => 'Description',
-        ],
-
-        'amount'   => [
-            'Amount',
-            '_' => 'Amount',
-            '?' => 'Amount',
-        ],
-
-    ],
+    ] + Lang::get('cash::cash_line'),
 
 ];

@@ -15,9 +15,19 @@
         'transfer_out'          => 'Transfer Out',
         'difference'            => 'Difference',
         'credit_note'           => 'Credit Note',
+        'employee_salary'       => 'Employee Salary',
         'employee_anticipation' => 'Employee Anticipation',
+        'employee_discount'     => 'Employee Discount',
         'general_expense'       => 'General Expense',
         'invoice'               => 'Invoice',
+        'receipment'            => 'Receipment',
+        'bank_deposit'          => 'Bank Deposit',
+    ],
+
+    'transacted_at'    => [
+        'Transacted at',
+        '_' => 'Transacted at',
+        '?' => 'Transacted at',
     ],
 
     'currency_id'   => [

@@ -42,6 +42,7 @@ class CashLine extends X_CashLine {
     public function beforeSave(Validator $validator) {
         // set currency from header if not set
         if ($this->currency_id === null) $this->currency()->associate( $this->cash->currency );
+
         // cash_type validations
         switch ($this->cash_type) {
             case self::CASH_TYPE_CreditNote:
@@ -57,12 +58,12 @@ class CashLine extends X_CashLine {
     }
 
     public function afterSave() {
-        // update cash ending balande
+        // update cash ending balance
         $this->cash->update([
             // set start balance
             'end_balance' => $this->cash->start_balance
                 // add lines amount
-                + $this->cash->lines->sum('amount') ]);
+                + $this->cash->lines()->sum('amount') ]);
     }
 
 }

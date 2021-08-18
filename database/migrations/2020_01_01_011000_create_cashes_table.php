@@ -23,8 +23,8 @@ class CreateCashesTable extends Migration {
             $table->foreignTo('Company');
             $table->foreignTo('CashBook');
             $table->string('description');
-            $table->amount('start_balance');
-            $table->amount('end_balance');
+            $table->amount('start_balance', signed: true);
+            $table->amount('end_balance', signed: true);
             // use table as document
             $table->asDocument();
         });
@@ -38,6 +38,7 @@ class CreateCashesTable extends Migration {
             $table->char('cash_type', 2);
             $table->amount('amount', signed: true);
             $table->string('description');
+            $table->timestamp('transacted_at')->useCurrent();
             // add relation to movement as morphable object
             $table->morphable('refer')->nullable();
             $table->morphable('partner')->nullable();

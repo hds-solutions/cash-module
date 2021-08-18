@@ -35,31 +35,31 @@
         </div>
 
         <div class="row">
-            <div class="col-12">
+            <div class="col-12 col-xl-6">
 
                 <div class="row">
-                    <div class="col-4 col-lg-4">@lang('cash::cash.cash_book_id.0'):</div>
-                    <div class="col-8 col-lg-6 h4">{{ $resource->cashBook->name }}</div>
+                    <div class="col">@lang('cash::cash.cash_book_id.0'):</div>
+                    <div class="col h4">{{ $resource->cashBook->name }}</div>
                 </div>
 
                 <div class="row">
-                    <div class="col-4 col-lg-4">@lang('cash::cash.currency_id.0'):</div>
-                    <div class="col-8 col-lg-6 h4">{{ $resource->cashBook->currency->name }}</div>
+                    <div class="col">@lang('cash::cash.currency_id.0'):</div>
+                    <div class="col h4">{{ currency($resource->cashBook->currency_id)->name }}</div>
                 </div>
 
                 <div class="row">
-                    <div class="col-4 col-lg-4">@lang('cash::cash.start_balance.0'):</div>
-                    <div class="col-8 col-lg-6 h4">{{ amount($resource->start_balance, $resource->cashBook->currency) }}</div>
+                    <div class="col">@lang('cash::cash.start_balance.0'):</div>
+                    <div class="col h4">{{ amount($resource->start_balance, currency($resource->cashBook->currency_id)) }}</div>
                 </div>
 
                 <div class="row">
-                    <div class="col-4 col-lg-4">@lang('cash::cash.end_balance.0'):</div>
-                    <div class="col-8 col-lg-6 h4">{{ amount($resource->end_balance, $resource->cashBook->currency) }}</div>
+                    <div class="col">@lang('cash::cash.end_balance.0'):</div>
+                    <div class="col h4">{{ currency($resource->currency_id)->code }} <b>{{ number($resource->end_balance, currency($resource->cashBook->currency_id)->decimals) }}</b></div>
                 </div>
 
                 <div class="row">
-                    <div class="col-4 col-lg-4">@lang('cash::cash.document_status.0'):</div>
-                    <div class="col-8 col-lg-6 h4">{{ Document::__($resource->document_status) }}</div>
+                    <div class="col">@lang('cash::cash.document_status.0'):</div>
+                    <div class="col h4">{{ Document::__($resource->document_status) }}</div>
                 </div>
 
             </div>
@@ -78,12 +78,13 @@
                     <table class="table table-sm table-striped table-borderless table-hover" width="100%" cellspacing="0">
                         <thead>
                             <tr>
-                                <th>@lang('cash::cash.lines.created_at.0')</th>
+                                <th>@lang('cash::cash.lines.transacted_at.0')</th>
                                 <th>@lang('cash::cash.lines.cash_type.0')</th>
-                                <th>@lang('cash::cash.lines.description.0')</th>
-                                <th>@lang('cash::cash.lines.amount.0')</th>
-                                <th>@lang('cash::cash.lines.new_amount.0')</th>
-                                <th>@lang('cash::cash.end_balance.0')</th>
+                                <th colspan="2">@lang('cash::cash.lines.description.0')</th>
+                                {{-- <th>@lang('cash::cash.lines.referable.0')</th> --}}
+                                <th class="text-right">@lang('cash::cash.lines.amount.0')</th>
+                                {{-- <th>@lang('cash::cash.lines.new_amount.0')</th> --}}
+                                <th class="text-right">@lang('cash::cash.end_balance.0')</th>
                             </tr>
                         </thead>
 
@@ -91,12 +92,41 @@
                             @php $end_balance = $resource->start_balance; @endphp
                             @foreach ($resource->lines as $line)
                                 <tr class="@if ($line->amount < 0) text-danger @endif">
-                                    <td class="align-middle pl-3">{{ pretty_date($line->created_at, true) }}</td>
-                                    <td class="align-middle pl-3">{{ $line->cash_type }}</td>
-                                    <td class="align-middle pl-3">{{ $line->description }}</td>
-                                    <td class="align-middle pl-3">{{ amount($line->amount, $line->currency) }}</td>
-                                    <td class="align-middle pl-3">{{ amount($line->net_amount, $resource->cashBook->currency) }}</td>
-                                    <td class="align-middle pl-3">{{ amount($end_balance += $line->net_amount, $resource->cashBook->currency) }}</td>
+                                    <td class="align-middle">{{ pretty_date($line->transacted_at, true) }}</td>
+                                    <td class="align-middle">{{ __(CashLine::CASH_TYPES[$line->cash_type]) }}</td>
+                                    <td class="align-middle">{{ $line->description }}</td>
+                                    <td class="align-middle">
+                                        <a href="{{ $line->referable ? match($line->cash_type) {
+                                            CashLine::CASH_TYPE_TransferIn  => route('backend.cashes.show', $line->referable->cash_id),
+                                            CashLine::CASH_TYPE_TransferOut => route('backend.cashes.show', $line->referable->to_cash_id),
+                                            //CashLine::CASH_TYPE_Difference   => '#',
+                                            CashLine::CASH_TYPE_CreditNote  => route('backend.credit_notes.show', $line->referable),
+                                            //CashLine::CASH_TYPE_EmployeeSalary   => '--',
+                                            CashLine::CASH_TYPE_EmployeeAnticipation    => route('backend.employees.show', $line->referable),
+                                            //CashLine::CASH_TYPE_EmployeeDiscount   => '--',
+                                            //CashLine::CASH_TYPE_GeneralExpense   => '--',
+                                            CashLine::CASH_TYPE_Invoice     => route('backend.invoices.show', $line->referable),
+                                            CashLine::CASH_TYPE_Receipment  => route('backend.receipments.show', $line->referable),
+                                            CashLine::CASH_TYPE_BankDeposit => route('backend.deposit_slips.show', $line->referable),
+                                            default => null,
+                                        } : '#' }}" class="text-decoration-none @if ($line->amount < 0) text-danger @else text-dark @endif"><b>{!! $line->referable ? match($line->cash_type) {
+                                            CashLine::CASH_TYPE_TransferIn  => $line->referable->cash->name,
+                                            CashLine::CASH_TYPE_TransferOut => $line->referable->Tocash->name,
+                                            //CashLine::CASH_TYPE_Difference   => '--',
+                                            CashLine::CASH_TYPE_CreditNote  => $line->referable->document_number.'<small class="ml-2">'.$line->referable->partnerable->full_name.'</small>',
+                                            //CashLine::CASH_TYPE_EmployeeSalary   => '--',
+                                            CashLine::CASH_TYPE_EmployeeAnticipation    => $line->referable->full_name,
+                                            //CashLine::CASH_TYPE_EmployeeDiscount   => '--',
+                                            //CashLine::CASH_TYPE_GeneralExpense   => '--',
+                                            CashLine::CASH_TYPE_Invoice     => $line->referable->document_number.'<small class="ml-2">'.$line->referable->partnerable->full_name.'</small>',
+                                            CashLine::CASH_TYPE_Receipment  => $line->referable->document_number.'<small class="ml-2">'.$line->referable->partnerable->full_name.'</small>',
+                                            CashLine::CASH_TYPE_BankDeposit => $line->referable->bankAccount->bank->name.'<small class="ml-2">'.$line->referable->bankAccount->account_number.'</small>',
+                                            default => null,
+                                        } : null !!}</b></a>
+                                    </td>
+                                    <td class="align-middle text-right">{{ currency($line->currency_id)->code }} <b>{{ number($line->amount, currency($line->currency_id)->decimals) }}</b></td>
+                                    {{-- <td class="align-middle">{{ amount($line->net_amount, $resource->cashBook->currency) }}</td> --}}
+                                    <td class="align-middle text-right">{{ currency($line->currency_id)->code }} <b>{{ number($end_balance += $line->net_amount, currency($resource->cashBook->currency_id)->decimals) }}</b></td>
                                 </tr>
                             @endforeach
                         </tbody>

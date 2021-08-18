@@ -75,11 +75,12 @@ class CashController extends Controller {
     public function show(Request $request, Resource $resource) {
         // load inventory data
         $resource->load([
-            'cashBook.currency',
-            'lines' => fn($line) => $line->with([
-                'cash',
-                'currency',
-            ]),
+            'cashBook',
+            'lines' => fn($line) => $line
+                ->with([
+                    'cash',
+                    // 'currency',
+                ]),
         ]);
 
         // redirect to list

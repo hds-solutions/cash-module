@@ -4,8 +4,6 @@ namespace HDSSolutions\Laravel\Models;
 
 use HDSSolutions\Laravel\Interfaces\Document;
 use HDSSolutions\Laravel\Traits\HasDocumentActions;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Support\Facades\DB;
 
 class CashMovement extends X_CashMovement implements Document {
     use HasDocumentActions;
@@ -45,14 +43,6 @@ class CashMovement extends X_CashMovement implements Document {
         // check if the document is approved
         if (!$this->isApproved()) return $this->documentError( __('cash::cashmovement.not-approved') );
 
-        // revalidate status of document through prepareIt()
-        if (!$this->processIt( Document::ACTION_Prepare ))
-            // error message already created by prepareIt()
-            return null;
-
-        // wrap process into transaction
-        DB::beginTransaction();
-
         // create out movement on origin cash
         $out = $this->cash->lines()->create([
             'cash_type'     => CashLine::CASH_TYPE_TransferOut,
@@ -85,9 +75,6 @@ class CashMovement extends X_CashMovement implements Document {
         if (count($out->errors()) > 0 || count($in->errors()) > 0)
             // return document process error
             return $this->documentError( $out->errors()->first() ?: $in->errors()->first() );
-
-        // process finished
-        DB::commit();
 
         // return document completed status
         return Document::STATUS_Completed;

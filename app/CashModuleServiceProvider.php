@@ -2,6 +2,7 @@
 
 namespace HDSSolutions\Laravel;
 
+use HDSSolutions\Laravel\Models\CashLine;
 use HDSSolutions\Laravel\Modules\ModuleServiceProvider;
 
 class CashModuleServiceProvider extends ModuleServiceProvider {
@@ -43,6 +44,8 @@ class CashModuleServiceProvider extends ModuleServiceProvider {
         $this->commands( $this->commands );
         // merge configuration
         $this->mergeConfigFrom( module_path('config/cash.php'), 'cash' );
+        // alias models
+        $this->alias('CashLine', CashLine::class);
     }
 
 }
