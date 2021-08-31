@@ -7,6 +7,10 @@ use HDSSolutions\Laravel\Traits\BelongsToCompany;
 abstract class X_CashBook extends Base\Model {
     use BelongsToCompany;
 
+    protected $orderBy = [
+        'name'  => 'ASC',
+    ];
+
     protected $fillable = [
         'company_id',
         'currency_id',
