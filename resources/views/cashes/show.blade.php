@@ -89,7 +89,7 @@
                         </thead>
 
                         <tbody>
-                            @php $end_balance = $resource->start_balance; @endphp
+                            @php $end_balance = $resource->end_balance; @endphp
                             @foreach ($resource->lines as $line)
                                 <tr class="@if ($line->amount < 0) text-danger @endif">
                                     <td class="align-middle">{{ pretty_date($line->transacted_at, true) }}</td>
@@ -126,7 +126,8 @@
                                     </td>
                                     <td class="align-middle text-right">{{ currency($line->currency_id)->code }} <b>{{ number($line->amount, currency($line->currency_id)->decimals) }}</b></td>
                                     {{-- <td class="align-middle">{{ amount($line->net_amount, $resource->cashBook->currency) }}</td> --}}
-                                    <td class="align-middle text-right">{{ currency($line->currency_id)->code }} <b>{{ number($end_balance += $line->net_amount, currency($resource->cashBook->currency_id)->decimals) }}</b></td>
+                                    <td class="align-middle text-right">{{ currency($line->currency_id)->code }} <b>{{ number($end_balance, currency($resource->cashBook->currency_id)->decimals) }}</b></td>
+                                    @php $end_balance -= $line->net_amount @endphp
                                 </tr>
                             @endforeach
                         </tbody>
