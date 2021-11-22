@@ -60,8 +60,8 @@ class Cash extends X_Cash implements Document {
     }
 
     public function prepareIt():?string {
-        // check if document has lines
-        if (!$this->lines->count()) return $this->documentError( __('cash::cash.no-lines') );
+        // // check if document has lines
+        // if (!$this->lines->count()) return $this->documentError( __('cash::cash.no-lines') );
         // return status InProgress
         return Document::STATUS_InProgress;
     }
