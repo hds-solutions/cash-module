@@ -3,7 +3,7 @@
     'nav'           => 'Cash Movements',
 
     'title'         => 'Cash Movements',
-    'description'   => 'Cash Movements description',
+    'description'   => '',
 
     'index'         => 'Cash Movements list',
     'create'        => 'Create new Cash Movement',
@@ -12,7 +12,6 @@
     'edit'          => 'Edit Cash Movement',
 
     'save'          => 'Save',
-    'save-create'   => 'Save & Import Lines',
     'cancel'        => 'Cancel',
 
 ];

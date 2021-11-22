@@ -1,18 +1,17 @@
 <?php return [
 
-    'nav'           => 'Cashes',
+    'nav'           => 'Daily Cashes',
 
-    'title'         => 'Cashes',
-    'description'   => 'Cashes description',
+    'title'         => 'Daily Cashes',
+    'description'   => '',
 
-    'index'         => 'Cashes list',
-    'create'        => 'Create new Cash',
-    'add'           => 'Add new Cash',
-    'show'          => 'Cash Details',
-    'edit'          => 'Edit Cash',
+    'index'         => 'Daily Cashes list',
+    'create'        => 'Open new Daily Cash',
+    'add'           => 'Add new Daily Cash',
+    'show'          => 'Daily Cash Details',
+    'edit'          => 'Edit Daily Cash',
 
     'save'          => 'Save',
-    'save-create'   => 'Save & Import Lines',
     'cancel'        => 'Cancel',
 
 ];

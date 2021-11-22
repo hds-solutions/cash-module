@@ -7,9 +7,9 @@
     ],
 
     'cash_type'     => [
-        'Cash Type',
-        '_' => 'Cash Type',
-        '?' => 'Cash Type help text',
+        'Movement Type',
+        '_' => 'Movement Type',
+        '?' => 'Movement Type help text',
 
         'transfer_in'           => 'Transfer In',
         'transfer_out'          => 'Transfer Out',
@@ -19,8 +19,8 @@
         'employee_anticipation' => 'Employee Anticipation',
         'employee_discount'     => 'Employee Discount',
         'general_expense'       => 'General Expense',
-        'invoice'               => 'Invoice',
-        'receipment'            => 'Receipment',
+        'invoice'               => 'Invoice payment',
+        'receipment'            => 'Receipment payment',
         'bank_deposit'          => 'Bank Deposit',
     ],
 

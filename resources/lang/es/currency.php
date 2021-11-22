@@ -15,7 +15,7 @@
     'decimals'          => [
         'Decimales',
         '_' => 'Decimales',
-        '?' => 'Cuantos decimales usa esta moneda',
+        '?' => 'Cuántos decimales usa esta moneda',
     ],
 
 ];

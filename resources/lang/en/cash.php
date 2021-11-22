@@ -26,6 +26,12 @@
         '?' => 'Start Balance help text',
     ],
 
+    'balance'       => [
+        'Balance',
+        '_' => 'Balance',
+        '?' => 'Balance help text',
+    ],
+
     'end_balance'       => [
         'End Balance',
         '_' => 'End Balance',
@@ -47,6 +53,6 @@
         '_' => 'Lines',
         '?' => 'Lines help text',
 
-    ] + Lang::get('cash::cash_line'),
+    ] + __('cash::cash_line'),
 
 ];

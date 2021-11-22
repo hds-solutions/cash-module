@@ -3,7 +3,7 @@
     'nav'           => 'Cash Books',
 
     'title'         => 'Cash Books',
-    'description'   => 'Cash Books description',
+    'description'   => '',
 
     'index'         => 'Cash Books list',
     'create'        => 'Create new Cash Book',
@@ -12,7 +12,6 @@
     'edit'          => 'Edit Cash Book',
 
     'save'          => 'Save',
-    'save-create'   => 'Save & Import Lines',
     'cancel'        => 'Cancel',
 
 ];

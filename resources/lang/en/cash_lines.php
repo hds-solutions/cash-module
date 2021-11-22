@@ -3,7 +3,7 @@
     'nav'           => 'Cash Lines',
 
     'title'         => 'Cash Lines',
-    'description'   => 'Cash Lines description',
+    'description'   => '',
 
     'index'         => 'Cash Lines list',
     'create'        => 'Create new Cash Line',
@@ -12,7 +12,6 @@
     'edit'          => 'Edit Cash Line',
 
     'save'          => 'Save',
-    'save-create'   => 'Save & Import Lines',
     'cancel'        => 'Cancel',
 
 ];

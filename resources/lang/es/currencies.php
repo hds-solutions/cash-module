@@ -3,7 +3,7 @@
     'nav'           => 'Monedas',
 
     'title'         => 'Monedas',
-    'description'   => 'Descripción de Monedas',
+    'description'   => '',
 
     'index'         => 'Lista de Monedas',
     'create'        => 'Crear nueva Moneda',
@@ -12,7 +12,6 @@
     'edit'          => 'Editar Moneda',
 
     'save'          => 'Guardar',
-    'save-create'   => 'Guardar & Importar Lineas',
     'cancel'        => 'Cancelar',
 
 ];
