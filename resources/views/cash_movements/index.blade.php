@@ -49,6 +49,7 @@
             <div class="table-responsive">
                 {{ $dataTable->table() }}
                 @include('backend::components.datatable-actions', [
+                    'resource'  => 'cash_movements',
                     'actions'   => [ 'show', 'update', 'delete' ],
                     'label'     => '{resource.description}',
                 ])

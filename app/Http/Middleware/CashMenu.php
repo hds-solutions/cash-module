@@ -30,7 +30,7 @@ class CashMenu extends Base\Menu {
     }
 
     private function currencies(&$menu) {
-        if (Route::has('backend.currencies') && $this->can('currencies'))
+        if (Route::has('backend.currencies') && $this->can('currencies.crud.index'))
             $menu->add(__('cash::currencies.nav'), [
                 'route'     => 'backend.currencies',
                 'icon'      => 'dollar-sign'
@@ -40,7 +40,7 @@ class CashMenu extends Base\Menu {
     }
 
     private function cash_books(&$menu) {
-        if (Route::has('backend.cash_books') && $this->can('cash_books'))
+        if (Route::has('backend.cash_books') && $this->can('cash_books.crud.index'))
             $menu->add(__('cash::cash_books.nav'), [
                 'route'     => 'backend.cash_books',
                 'icon'      => 'book'
@@ -50,7 +50,7 @@ class CashMenu extends Base\Menu {
     }
 
     private function cashes(&$menu) {
-        if (Route::has('backend.cashes') && $this->can('cashes'))
+        if (Route::has('backend.cashes') && $this->can('cashes.crud.index'))
             $menu->add(__('cash::cashes.nav'), [
                 'route'     => 'backend.cashes',
                 'icon'      => 'cash-register'
@@ -60,7 +60,7 @@ class CashMenu extends Base\Menu {
     }
 
     private function cash_movements(&$menu) {
-        if (Route::has('backend.cash_movements') && $this->can('cash_movements'))
+        if (Route::has('backend.cash_movements') && $this->can('cash_movements.crud.index'))
             $menu->add(__('cash::cash_movements.nav'), [
                 'route'     => 'backend.cash_movements',
                 'icon'      => 'money-bill-wave'

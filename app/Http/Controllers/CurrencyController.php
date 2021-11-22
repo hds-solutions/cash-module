@@ -33,9 +33,6 @@ class CurrencyController extends Controller {
     }
 
     public function store(Request $request) {
-        // cast to boolean
-        // $request->merge([ 'show_home' => $request->show_home == 'on' ]);
-
         // create resource
         $resource = new Resource( $request->input() );
 

@@ -25,12 +25,19 @@ class CashBookController extends Controller {
         if ($request->ajax()) return $dataTable->ajax();
 
         // return view with dataTable
-        return $dataTable->render('cash::cash_books.index', [ 'count' => Resource::count() ]);
+        return $dataTable->render('cash::cash_books.index', [
+            'count'                 => Resource::count(),
+            'show_company_selector' => !backend()->companyScoped(),
+        ]);
     }
 
     public function create(Request $request) {
+        // force company selection
+        if (!backend()->companyScoped()) return view('backend::layouts.master', [ 'force_company_selector' => true ]);
+
         // load currencies
         $currencies = Currency::all();
+
         // show create form
         return view('cash::cash_books.create', compact('currencies'));
     }

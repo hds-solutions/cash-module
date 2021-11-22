@@ -3,23 +3,24 @@
 namespace HDSSolutions\Laravel\DataTables;
 
 use HDSSolutions\Laravel\Models\Cash as Resource;
-use HDSSolutions\Laravel\Traits\DatatableAsDocument;
 use HDSSolutions\Laravel\Traits\DatatableWithCurrency;
+use HDSSolutions\Laravel\Traits\DatatableAsDocument;
 use Illuminate\Database\Eloquent\Builder;
 use Yajra\DataTables\Html\Column;
 
 class CashDataTable extends Base\DataTable {
-    use DatatableAsDocument;
     use DatatableWithCurrency;
+    use DatatableAsDocument;
 
     protected array $with = [
         'cashBook.currency',
     ];
 
     protected array $orderBy = [
+        'document_status'       => 'asc',
         'document_completed_at' => 'desc',
-        'created_at'            => 'desc',
-        'description'           => 'asc',
+        // 'created_at'            => 'desc',
+        // 'description'           => 'asc',
     ];
 
     public function __construct() {

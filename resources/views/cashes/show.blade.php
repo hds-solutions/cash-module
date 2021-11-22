@@ -1,4 +1,4 @@
-@extends('backend::layouts.master')
+@extends('cash::layouts.master')
 
 @section('page-name', __('cash::cashes.title'))
 @section('description', __('cash::cashes.description'))
@@ -84,7 +84,7 @@
                                 {{-- <th>@lang('cash::cash.lines.referable.0')</th> --}}
                                 <th class="text-right">@lang('cash::cash.lines.amount.0')</th>
                                 {{-- <th>@lang('cash::cash.lines.new_amount.0')</th> --}}
-                                <th class="text-right">@lang('cash::cash.end_balance.0')</th>
+                                <th class="text-right">@lang('cash::cash.balance.0')</th>
                             </tr>
                         </thead>
 
@@ -98,7 +98,7 @@
                                     <td class="align-middle">
                                         <a href="{{ $line->referable ? match($line->cash_type) {
                                             CashLine::CASH_TYPE_TransferIn  => route('backend.cashes.show', $line->referable->cash_id),
-                                            CashLine::CASH_TYPE_TransferOut => route('backend.cashes.show', $line->referable->to_cash_id),
+                                            CashLine::CASH_TYPE_TransferOut => route('backend.cashes.show', $line->referable->cash_id),
                                             //CashLine::CASH_TYPE_Difference   => '#',
                                             CashLine::CASH_TYPE_CreditNote  => route('backend.credit_notes.show', $line->referable),
                                             //CashLine::CASH_TYPE_EmployeeSalary   => '--',
@@ -110,8 +110,8 @@
                                             CashLine::CASH_TYPE_BankDeposit => route('backend.deposit_slips.show', $line->referable),
                                             default => null,
                                         } : '#' }}" class="text-decoration-none @if ($line->amount < 0) text-danger @else text-dark @endif"><b>{!! $line->referable ? match($line->cash_type) {
-                                            CashLine::CASH_TYPE_TransferIn  => $line->referable->cash->name,
-                                            CashLine::CASH_TYPE_TransferOut => $line->referable->Tocash->name,
+                                            CashLine::CASH_TYPE_TransferIn  => $line->referable->cash->cashBook->name,
+                                            CashLine::CASH_TYPE_TransferOut => $line->referable->cash->cashBook->name,
                                             //CashLine::CASH_TYPE_Difference   => '--',
                                             CashLine::CASH_TYPE_CreditNote  => $line->referable->document_number.'<small class="ml-2">'.$line->referable->partnerable->full_name.'</small>',
                                             //CashLine::CASH_TYPE_EmployeeSalary   => '--',

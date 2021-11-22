@@ -3,14 +3,14 @@
 namespace HDSSolutions\Laravel\DataTables;
 
 use HDSSolutions\Laravel\Models\CashMovement as Resource;
-use HDSSolutions\Laravel\Traits\DatatableAsDocument;
 use HDSSolutions\Laravel\Traits\DatatableWithCurrency;
+use HDSSolutions\Laravel\Traits\DatatableAsDocument;
 use Illuminate\Database\Eloquent\Builder;
 use Yajra\DataTables\Html\Column;
 
 class CashMovementDataTable extends Base\DataTable {
-    use DatatableAsDocument;
     use DatatableWithCurrency;
+    use DatatableAsDocument;
 
     protected array $with = [
         'cash.cashBook.currency',

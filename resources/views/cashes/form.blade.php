@@ -1,7 +1,7 @@
 @include('backend::components.errors')
 
 <x-backend-form-foreign :resource="$resource ?? null" name="cash_book_id" required
-    foreign="cash_books" :values="$cash_books" foreign-add-label="cash::cash_books.add"
+    foreign="cash_books" :values="$cash_books" request="cash_book" foreign-add-label="cash::cash_books.add"
 
     label="cash::cash.cash_book_id.0"
     placeholder="cash::cash.cash_book_id._"

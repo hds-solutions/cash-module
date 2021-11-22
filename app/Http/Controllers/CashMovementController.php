@@ -42,12 +42,19 @@ class CashMovementController extends Controller {
         $cashBooks = CashBook::all();
 
         // return view with dataTable
-        return $dataTable->render('cash::cash_movements.index', compact('cashBooks') + [ 'count' => Resource::count() ]);
+        return $dataTable->render('cash::cash_movements.index', compact('cashBooks') + [
+            'count'                 => Resource::count(),
+            'show_company_selector' => !backend()->companyScoped(),
+        ]);
     }
 
     public function create(Request $request) {
+        // force company selection
+        if (!backend()->companyScoped()) return view('backend::layouts.master', [ 'force_company_selector' => true ]);
+
         // load open cashes
         $cashes = Cash::open()->get();
+
         // get current conversion rates
         $conversion_rates = ConversionRate::valid()->get();
 
@@ -56,9 +63,6 @@ class CashMovementController extends Controller {
     }
 
     public function store(Request $request) {
-        // cast to boolean
-        // $request->merge([ 'show_home' => $request->show_home == 'on' ]);
-
         // create resource
         $resource = new Resource( $request->input() );
 

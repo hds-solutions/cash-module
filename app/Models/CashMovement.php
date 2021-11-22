@@ -24,7 +24,7 @@ class CashMovement extends X_CashMovement implements Document {
         // both origin cash and destination cash must be open
         if ($this->cash->isProcessed() || $this->toCash->isProcessed())
             // return validation error
-            return $this->documentError( __('cash::cashmovement.processed') );
+            return $this->documentError( __('cash::cashmovement.prepareIt.cash-already-processed') );
         // return document InProgress
         return Document::STATUS_InProgress;
     }
@@ -45,6 +45,7 @@ class CashMovement extends X_CashMovement implements Document {
 
         // create out movement on origin cash
         $out = $this->cash->lines()->create([
+            'transacted_at' => now(),
             'cash_type'     => CashLine::CASH_TYPE_TransferOut,
             'description'   => $this->description,
             'currency_id'   => $this->cash->currency_id, // TODO: Fix validation to allow beforeSave() before Validation->validate()
@@ -52,6 +53,7 @@ class CashMovement extends X_CashMovement implements Document {
         ]);
         // create in movement on destination cash
         $in = $this->toCash->lines()->create([
+            'transacted_at' => now(),
             'cash_type'     => CashLine::CASH_TYPE_TransferIn,
             'description'   => $this->description,
             'currency_id'   => $this->toCash->currency_id, // TODO: Fix validation to allow beforeSave() before Validation->validate()

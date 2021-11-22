@@ -7,6 +7,8 @@ use HDSSolutions\Laravel\DataTables\CashDataTable as DataTable;
 use HDSSolutions\Laravel\Http\Request;
 use HDSSolutions\Laravel\Models\Cash as Resource;
 use HDSSolutions\Laravel\Models\CashBook;
+use HDSSolutions\Laravel\Models\Invoice;
+use HDSSolutions\Laravel\Models\Receipment;
 use HDSSolutions\Laravel\Traits\CanProcessDocument;
 
 class CashController extends Controller {
@@ -40,10 +42,16 @@ class CashController extends Controller {
         $cashBooks = CashBook::all();
 
         // return view with dataTable
-        return $dataTable->render('cash::cashes.index', compact('cashBooks') + [ 'count' => Resource::count() ]);
+        return $dataTable->render('cash::cashes.index', compact('cashBooks') + [
+            'count'                 => Resource::count(),
+            'show_company_selector' => !backend()->companyScoped(),
+        ]);
     }
 
     public function create(Request $request) {
+        // force company selection
+        if (!backend()->companyScoped()) return view('backend::layouts.master', [ 'force_company_selector' => true ]);
+
         // load cash_books
         $cash_books = CashBook::all();
 
@@ -78,9 +86,20 @@ class CashController extends Controller {
             'cashBook',
             'lines' => fn($line) => $line
                 ->with([
-                    'cash',
-                    // 'currency',
+                    // 'cash',
+                    'referable' => fn($referable) => $referable->with([]),
+                    'partnerable',
                 ]),
+        ]);
+        $resource->setRelation('lines', $resource->lines->transform(fn($line) =>
+            // set CashLine.cash relation manually to avoid more queries
+            $line->setRelation('cash', $resource)
+        ));
+        // load lines polymorphic relations
+        $resource->lines->loadMorph('referable', [
+            Invoice::class      => [ 'partnerable' ],
+            Receipment::class   => [ 'partnerable' ],
+            // CashLine::class     => [ 'referable.cash.cashBook' ],
         ]);
 
         // redirect to list
