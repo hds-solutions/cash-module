@@ -55,4 +55,12 @@
 
     ] + __('cash::cash_line'),
 
+    'beforeSave'    => [
+        'already-open'  => 'El libro de caja :cashBook ya tiene una caja diaria abierta',
+    ],
+
+    'completeIt'    => [
+        'not-approved'  => 'El documento debe ser aprobado',
+    ],
+
 ];

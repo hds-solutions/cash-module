@@ -26,7 +26,7 @@ class CashMovement extends X_CashMovement implements Document {
             // return validation error
             return $this->documentError( __('cash::cashmovement.prepareIt.cash-already-processed') );
         // return document InProgress
-        return Document::STATUS_InProgress;
+        return self::STATUS_InProgress;
     }
 
     public function approveIt():bool {
@@ -41,7 +41,7 @@ class CashMovement extends X_CashMovement implements Document {
 
     public function completeIt():?string {
         // check if the document is approved
-        if (!$this->isApproved()) return $this->documentError( __('cash::cashmovement.not-approved') );
+        if (!$this->isApproved()) return $this->documentError( __('cash::cashmovement.completeIt.not-approved') );
 
         // create out movement on origin cash
         $out = $this->cash->lines()->create([
@@ -79,7 +79,7 @@ class CashMovement extends X_CashMovement implements Document {
             return $this->documentError( $out->errors()->first() ?: $in->errors()->first() );
 
         // return document completed status
-        return Document::STATUS_Completed;
+        return self::STATUS_Completed;
     }
 
 }

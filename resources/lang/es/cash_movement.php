@@ -48,4 +48,12 @@
         '?' => 'Estado del Documento help text',
     ],
 
+    'prepareIt'     => [
+        'cash-already-processed'    => 'La caja de origen y/o destino ya está procesada (cerrada)',
+    ],
+
+    'completeIt'    => [
+        'not-approved'  => 'El documento debe ser aprobado',
+    ],
+
 ];

@@ -55,4 +55,12 @@
 
     ] + __('cash::cash_line'),
 
+    'beforeSave'    => [
+        'already-open'  => 'The CashBook :cashBook already has an open cash',
+    ],
+
+    'completeIt'    => [
+        'not-approved'  => 'The document must be approved first',
+    ],
+
 ];

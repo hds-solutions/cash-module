@@ -46,7 +46,9 @@ class Cash extends X_Cash implements Document {
         // check for open Cash
         if (!$this->exists && Cash::open($this->cashBook)->count() > 0)
             // return error
-            $validator->errors()->add('cash_book_id', __('cash::cash.already-open', [ 'cashBook' => $this->cashBook->name ]));
+            $validator->errors()->add('cash_book_id', __('cash::cash.beforeSave.already-open', [
+                'cashBook' => $this->cashBook->name
+            ]));
 
         // get cashes of current CashBook
         if (!$this->exists && $cash = Cash::ofCashBook($this->cashBook)
@@ -63,7 +65,7 @@ class Cash extends X_Cash implements Document {
         // // check if document has lines
         // if (!$this->lines->count()) return $this->documentError( __('cash::cash.no-lines') );
         // return status InProgress
-        return Document::STATUS_InProgress;
+        return self::STATUS_InProgress;
     }
 
     public function approveIt():bool {
@@ -78,10 +80,10 @@ class Cash extends X_Cash implements Document {
 
     public function completeIt():?string {
         // check if the document is approved
-        if (!$this->isApproved()) return $this->documentError( __('cash::cash.not-approved') );
+        if (!$this->isApproved()) return $this->documentError( __('cash::cash.completeIt.not-approved') );
 
         // TODO: completeIt() process
-        return Document::STATUS_Completed;
+        return self::STATUS_Completed;
     }
 
 }

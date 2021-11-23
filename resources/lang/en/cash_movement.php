@@ -48,4 +48,12 @@
         '?' => 'Document Status help text',
     ],
 
+    'prepareIt'     => [
+        'cash-already-processed'    => 'The origin nor destination cash is already processed (closed)',
+    ],
+
+    'completeIt'    => [
+        'not-approved'  => 'The document must be approved first',
+    ],
+
 ];
