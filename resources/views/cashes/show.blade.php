@@ -105,7 +105,7 @@
                                             CashLine::CASH_TYPE_EmployeeAnticipation    => route('backend.employees.show', $line->referable),
                                             //CashLine::CASH_TYPE_EmployeeDiscount   => '--',
                                             //CashLine::CASH_TYPE_GeneralExpense   => '--',
-                                            CashLine::CASH_TYPE_Invoice     => route('backend.invoices.show', $line->referable),
+                                            CashLine::CASH_TYPE_Invoice     => route('backend.sales.invoices.show', $line->referable),
                                             CashLine::CASH_TYPE_Receipment  => route('backend.receipments.show', $line->referable),
                                             CashLine::CASH_TYPE_BankDeposit => route('backend.deposit_slips.show', $line->referable),
                                             default => null,
