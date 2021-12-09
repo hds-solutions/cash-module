@@ -1,5 +1,11 @@
 <?php return [
 
+    'currency_id'       => [
+        'Currency',
+        '_' => 'Currency',
+        '?' => 'Currency',
+    ],
+
     'name'              => [
         'Name',
         '_' => 'Name',
