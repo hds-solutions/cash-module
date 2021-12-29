@@ -14,7 +14,7 @@ class CashPolicy {
     }
 
     public function view(User $user, Resource $resource) {
-        return $user->can('cashes.crud.show');
+        return $user->can('cashes.crud.show') && $resource->isPublicFor($user);
     }
 
     public function create(User $user) {
@@ -22,7 +22,7 @@ class CashPolicy {
     }
 
     public function update(User $user, Resource $resource) {
-        return $user->can('cashes.crud.update');
+        return $user->can('cashes.crud.update') && $resource->isPublicFor($user);
     }
 
     public function delete(User $user, Resource $resource) {

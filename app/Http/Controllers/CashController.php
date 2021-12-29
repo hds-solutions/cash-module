@@ -39,7 +39,7 @@ class CashController extends Controller {
         if ($request->ajax()) return $dataTable->ajax();
 
         // load CashBooks
-        $cashBooks = CashBook::all();
+        $cashBooks = CashBook::isPublicFor( auth()->user() )->get();
 
         // return view with dataTable
         return $dataTable->render('cash::cashes.index', compact('cashBooks') + [
@@ -53,7 +53,7 @@ class CashController extends Controller {
         if (!backend()->companyScoped()) return view('backend::layouts.master', [ 'force_company_selector' => true ]);
 
         // load cash_books
-        $cash_books = CashBook::all();
+        $cash_books = CashBook::isPublicFor( auth()->user() )->get();
 
         // show create form
         return view('cash::cashes.create', compact('cash_books'));
@@ -113,7 +113,7 @@ class CashController extends Controller {
             return redirect()->route('backend.cashes.show', $resource);
 
         // load cash_books
-        $cash_books = CashBook::all();
+        $cash_books = CashBook::isPublicFor( auth()->user() )->get();
 
         // show edit form
         return view('cash::cashes.edit', compact('cash_books', 'resource'));

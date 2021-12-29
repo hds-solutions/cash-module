@@ -42,6 +42,10 @@ class Cash extends X_Cash implements Document {
         return $query->where('cash_book_id', $cashBook->id);
     }
 
+    public function isPublicFor(int|User|null $user = null) {
+        return $this->cashBook->is_public || $this->cashBook->users->contains(fn($cUser) => $cUser->id === ($user instanceof User ? $user->id : $user));
+    }
+
     protected function beforeSave(Validator $validator) {
         // check for open Cash
         if (!$this->exists && Cash::open($this->cashBook)->count() > 0)
