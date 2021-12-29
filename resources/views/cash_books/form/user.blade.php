@@ -5,9 +5,9 @@
         foreign="users" foreign-add-label="backend::users.add"
         show="full_name"
 
-        label="backend::user.users.0"
-        placeholder="backend::user.users._"
-        {{-- helper="backend::user.users.?" --}} />
+        label="cash::cash_book.users.0"
+        placeholder="cash::cash_book.users._"
+        {{-- helper="cash::cash_book.users.?" --}} />
 
     <button type="button" class="btn btn-danger ml-2"
         data-action="delete"
