@@ -14,6 +14,7 @@ class CashDataTable extends Base\DataTable {
 
     protected array $with = [
         'cashBook.currency',
+        'cashBook.users',
     ];
 
     protected array $orderBy = [
@@ -69,6 +70,11 @@ class CashDataTable extends Base\DataTable {
             ->join('cash_books', 'cash_books.id', 'cashes.cash_book_id')
             // join to currency
             ->join('currencies', 'currencies.id', 'cash_books.currency_id');
+    }
+
+    protected function results($results) {
+        // filter user access
+        return $results->filter(fn($cash) => $cash->cashBook->is_public || $cash->cashBook->users->contains(fn($user) => $user->id === auth()->user()->id));
     }
 
     protected function orderCashBookName(Builder $query, string $order):Builder {
