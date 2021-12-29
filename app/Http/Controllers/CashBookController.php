@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use HDSSolutions\Laravel\DataTables\CashBookDataTable as DataTable;
 use HDSSolutions\Laravel\Http\Request;
 use HDSSolutions\Laravel\Models\CashBook as Resource;
+use HDSSolutions\Laravel\Models\User;
 use HDSSolutions\Laravel\Models\Currency;
+use Illuminate\Support\Facades\DB;
 
 class CashBookController extends Controller {
 
@@ -35,16 +37,21 @@ class CashBookController extends Controller {
         // force company selection
         if (!backend()->companyScoped()) return view('backend::layouts.master', [ 'force_company_selector' => true ]);
 
+        // load users
+        $users = User::ordered()->get();
         // load currencies
-        $currencies = Currency::all();
+        $currencies = Currency::ordered()->get();
 
         // show create form
-        return view('cash::cash_books.create', compact('currencies'));
+        return view('cash::cash_books.create', compact('users', 'currencies'));
     }
 
     public function store(Request $request) {
+        // start a transaction
+        DB::beginTransaction();
+
         // cast to boolean
-        // $request->merge([ 'show_home' => $request->show_home == 'on' ]);
+        if ($request->has('is_public')) $request->merge([ 'is_public' => filter_var($request->is_public, FILTER_VALIDATE_BOOLEAN) ]);
 
         // create resource
         $resource = new Resource( $request->input() );
@@ -54,6 +61,17 @@ class CashBookController extends Controller {
             // redirect with errors
             return back()->withInput()
                 ->withErrors( $resource->errors() );
+
+        // sync cash_book users
+        if ($request->has('users')) $resource->users()->sync(
+            // get users as collection
+            $users = collect($request->get('users'))
+                // filter empty users
+                ->filter(fn($user) => $user !== null)
+            );
+
+        // commit changes to database
+        DB::commit();
 
         // check return type
         return $request->has('only-form') ?
@@ -69,22 +87,41 @@ class CashBookController extends Controller {
     }
 
     public function edit(Request $request, Resource $resource) {
+        // load users
+        $users = User::ordered()->get();
         // load currencies
-        $currencies = Currency::all();
+        $currencies = Currency::ordered()->get();
 
         // show edit form
-        return view('cash::cash_books.edit', compact('currencies', 'resource'));
+        return view('cash::cash_books.edit', compact('resource',
+            'users',
+            'currencies',
+        ));
     }
 
     public function update(Request $request, Resource $resource) {
-        // cast show_home to boolean
-        // $request->merge([ 'show_home' => $request->show_home == 'on' ]);
+        // start a transaction
+        DB::beginTransaction();
+
+        // cast to boolean
+        if ($request->has('is_public')) $request->merge([ 'is_public' => filter_var($request->is_public, FILTER_VALIDATE_BOOLEAN) ]);
 
         // save resource
         if (!$resource->update( $request->input() ))
             // redirect with errors
             return back()->withInput()
                 ->withErrors( $resource->errors() );
+
+        // sync cash_book users
+        if ($request->has('users')) $resource->users()->sync(
+            // get users as collection
+            $users = collect($request->get('users'))
+                // filter empty users
+                ->filter(fn($user) => $user !== null)
+            );
+
+        // commit changes to database
+        DB::commit();
 
         // redirect to list
         return redirect()->route('backend.cash_books');

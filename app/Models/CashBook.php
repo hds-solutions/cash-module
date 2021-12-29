@@ -12,4 +12,10 @@ class CashBook extends X_CashBook {
         return $this->hasMany(Cash::class);
     }
 
+    public function users() {
+        return $this->belongsToMany(User::class)
+            ->using(CashBookUser::class)
+            ->withTimestamps();
+    }
+
 }

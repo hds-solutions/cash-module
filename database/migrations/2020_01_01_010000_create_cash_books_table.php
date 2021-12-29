@@ -23,6 +23,7 @@ class CreateCashBooksTable extends Migration {
             $table->foreignTo('Company');
             $table->foreignTo('Currency');
             $table->string('name');
+            $table->boolean('is_public')->default(true);
         });
     }
 
